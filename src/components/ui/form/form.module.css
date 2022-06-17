@@ -1,0 +1,23 @@
+.formWrapper {
+    background-color: #fff;
+    width: 35%;
+    margin: 30px auto;
+    text-align: center;
+    padding: 20px 0 40px;
+    border-radius: 4px;
+    box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%);
+
+}
+
+.title {
+    font-size: 30px;
+    font-weight: 300;
+    text-align: center;
+    margin: 32px 0;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    padding: 0 60px;
+}

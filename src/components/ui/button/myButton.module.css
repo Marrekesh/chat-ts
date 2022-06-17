@@ -1,0 +1,50 @@
+.btn {
+    width: 100px;
+    height: 35px;
+    font-size: 20px;
+    background-color: #d6e3ec;
+    border-radius: 3px;
+    outline: #fff;
+    border: #fff;   
+    cursor: pointer;
+
+    font-family: Lato;
+    font-size: 14px;
+    line-height: 30px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #8ea1b4;
+
+    transition: 200ms ease-in;
+}
+
+.btn:hover {
+    background-color: #bedaee;
+}
+
+.formButton {
+    border: none;
+    display: block;
+    background-color: #3ca9e2;
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease;
+    font-size: 18px;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+
+    width: 100%;
+    outline: none;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 4px;
+}
+
+.formButton:hover {
+    background-color: #3492c5;
+}

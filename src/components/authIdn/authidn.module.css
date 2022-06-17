@@ -1,0 +1,47 @@
+
+.wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.name {
+    font-family: Lato;
+    font-size: 15px;
+    line-height: 30px;
+    font-weight: 700;
+    letter-spacing: 0.025em;
+    color: #f6fafe;
+    margin-right: 3px;
+}
+
+.name:last-child {
+    margin-right: 0;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+}
+
+.statusText {
+    font-family: Lato;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: #2775a9;
+    margin-right: 10px;
+}
+
+.statusArrow {
+    font-size: 20px;
+    transform: rotate(-90deg);
+    cursor: pointer;
+}
