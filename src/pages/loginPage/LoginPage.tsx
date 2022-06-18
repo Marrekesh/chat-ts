@@ -3,8 +3,18 @@ import Input from "../../components/ui/input/Input"
 import MyButton from "../../components/ui/button/MyButton"
 import classes from './loginPage.module.css'
 import btn from '../../components/ui/button/myButton.module.css'
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
+import { useAppSelector, useAppDispatch } from "../../hooks/redux"
+import { authSlice } from "../../store/reducers/AuthSlice"
+
 
 const LoginPage = () => {
+
+	// const {email, password} = useAppSelector(state => state.authStateReducer.loginState)
+	// const dispatch = useAppDispatch()
+
+	// dispatch(authSlice.actions.setLoginState(1))
+
 	return (
 		<div className={classes.loginPage}>
 			<Form title="Login">

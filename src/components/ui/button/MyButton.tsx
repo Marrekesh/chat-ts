@@ -3,7 +3,8 @@ import c from './myButton.module.css'
 interface IButton {
     props?: string[]
     children: React.ReactNode
-    className: string
+    className: string,
+    onClick?: (e: any) => void
 }
 
 const MyButton = ({children, className, ...props}: IButton) => {

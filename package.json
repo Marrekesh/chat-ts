@@ -49,6 +49,7 @@
   },
   "devDependencies": {
     "@types/classnames": "^2.3.1",
+    "redux-devtools-extension": "^2.13.9",
     "typescript-plugin-css-modules": "^3.4.0"
   }
 }

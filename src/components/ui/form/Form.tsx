@@ -2,7 +2,7 @@ import c from './form.module.css'
 
 interface IForm {
     props?: any[],
-    title: string
+    title?: string
     children: React.ReactNode
 }
 
