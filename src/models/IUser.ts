@@ -9,7 +9,9 @@ export interface LoginState {
     password: string
 }
 
-export interface RegistrState extends LoginState {
+export interface RegistrState {
+    email: string,
+    password: string
     name: string,
     surname: string,
     link: string

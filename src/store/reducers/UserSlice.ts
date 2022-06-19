@@ -22,13 +22,19 @@ export const userSlice = createSlice({
         setUser(state, action: PayloadAction<UserState>) {
             state.id = action.payload.id
             state.email = action.payload.email
-            state.isLoading = false
         },
         setLoading(state, action) {
             state.isLoading = action.payload
         },
+        removeUser(state) {
+            state.id = ''
+            state.email = ''
+        },
+        setError(state, action) {
+            state.error = action.payload
+        }
     }
 })
-export const {setUser, setLoading} = userSlice.actions;
+export const {setUser, setLoading, removeUser} = userSlice.actions;
 
 export default userSlice.reducer

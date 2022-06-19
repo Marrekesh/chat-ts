@@ -1,14 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import {LoginState, RegistrState} from '../../models/IUser'
+import {LoginState} from '../../models/IUser'
 
 interface AuthState {
     loginState: LoginState,
-    registrState: RegistrState
+    isLoading?: boolean,
+    error?: string
 }
 
 const initialState: AuthState = {
     loginState: {email: '', password: ''},
-    registrState: {name: '', surname: '', link: '', email: '', password: ''},
+    isLoading: false,
+    error:''
 
 }
 
@@ -24,15 +26,11 @@ export const authSlice = createSlice({
         removeLoginState(state) {
             state.loginState = {email: '', password: ''}
         },
-        setRegisterState(state, action: PayloadAction<RegistrState>) {
-            state.registrState.name = action.payload.name
-            state.registrState.surname = action.payload.surname
-            state.registrState.link = action.payload.link
-            state.registrState.email = action.payload.email
-            state.registrState.password = action.payload.password
+        setLoading(state, action) {
+            state.isLoading = action.payload
         },
-        removeRegisterState(state) {
-            state.registrState = {name: '', surname: '', link: '', email: '', password: ''}
+        setError(state, action) {
+            state.error = action.payload
         }
 
     }
@@ -40,4 +38,9 @@ export const authSlice = createSlice({
 
 export default authSlice.reducer
 
-export const {setLoginState, removeLoginState, setRegisterState, removeRegisterState} = authSlice.actions;
+export const {
+    setLoginState,
+    removeLoginState,
+    setLoading,
+    setError
+} = authSlice.actions;

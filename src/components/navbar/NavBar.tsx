@@ -3,26 +3,33 @@ import AuthIdn from '../authIdn/AuthIdn'
 import c from './navbar.module.css'
 import MyButton from '../ui/button/MyButton'
 import but from '../ui/button/myButton.module.css'
+import { useAuth } from '../../hooks/useAuth'
+import { removeUser } from '../../store/reducers/UserSlice'
+import { useAppDispatch } from '../../hooks/redux'
+import { Link, useParams } from 'react-router-dom'
 
-const NavBar = () => {
+interface INavBar {
+    props?: string[]
+    children: React.ReactNode
+    className?: string,
+    // onClick?: (e: any) => void
+}
 
-    const authenticated = false
 
-    const content = authenticated 
-    ? 
-        <nav className={c.nav}>
-            <Burger/>
-            <AuthIdn/>
-        </nav>
-    :
-        <nav className={`${c.nav} ${c.navEnd}`}>
-            <MyButton className={but.btn}>Sign Up</MyButton>
-        </nav>    
+const NavBar = ({children, ...props}: INavBar) => {
+    const {isAuth} = useAuth()
+    const dispatch = useAppDispatch()
+
+    const navClasses = isAuth ? `${c.nav}` :`${c.nav} ${c.navEnd}` 
+
 
     return (
 
         <div className={c.navbar}>
-            {content}
+            <nav className={navClasses}>
+                {children}
+            </nav> 
+            
         </div>
 
     )

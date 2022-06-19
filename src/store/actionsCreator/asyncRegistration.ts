@@ -1,7 +1,8 @@
 import { AppDispatch } from "../store"
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
-import {setUser, setLoading} from "../reducers/UserSlice"
-import { useNavigate } from "react-router-dom"
+import {setStatus, setLoading, setError} from "../reducers/RegisterSlice"
+
+// import { useNavigate } from "react-router-dom"
 export const asyncRegistrAction = (email: string, password: string) => async (dispatch: AppDispatch) => {
     
     try {
@@ -9,17 +10,18 @@ export const asyncRegistrAction = (email: string, password: string) => async (di
         const auth = getAuth()
         createUserWithEmailAndPassword(auth, email, password)
             .then(({user}) => {
-                dispatch(setUser({
-                    email: user.email,
-                    id: user.uid,
-                }))
+              alert('ZAREGANO')
             })
-            .catch(error => console.log(error))
-            
+            .catch((error) => {
+				dispatch(setError(error.message))
+                setTimeout(() => {
+					dispatch(setError(''))
+				}, 2000)
+			})
     } catch (e) {
         console.log('Не смог зарегать')
     } finally {
         dispatch(setLoading(false))
+        setStatus(false)
     }
-
 }

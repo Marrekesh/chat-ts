@@ -5,16 +5,13 @@ import {
 import MainPage from "../pages/mainPage/MainPage";
 import LoginPage from "../pages/loginPage/LoginPage";
 import SignUpPage from "../pages/signUpPage/SignUpPage";
-
+import { useAuth } from "../hooks/useAuth";
 
 const AuthRoutes = () => {
 
-    const authenticated = false
+    const {isAuth} = useAuth()
 
-
-    
-
-    if (authenticated) {
+    if (isAuth) {
         return (
 
             <Routes>
