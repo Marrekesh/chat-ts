@@ -1,14 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import {RegistrState} from '../../models/IUser'
 
-type IStatus = boolean
+import { RegisterState, RegistrState } from '../../types/stateTypes'
+import { AuthUserDataString, AuthUserDataBoolean } from '../../types/actionsTypes'
 
-interface RegisterState {
-    registrState: RegistrState,
-    status: IStatus
-    isLoading?: boolean,
-    error?: string
-}
 
 const initialState: RegisterState = {
     registrState: {name: '', surname: '', link: '', email: '', password: ''},
@@ -32,13 +26,13 @@ export const registerSlice = createSlice({
         removeRegisterState(state) {
             state.registrState = {name: '', surname: '', link: '', email: '', password: ''}
         },
-        setLoading(state, action) {
+        setLoading(state, action: PayloadAction<AuthUserDataBoolean>) {
             state.isLoading = action.payload
         },
-        setStatus(state, action: PayloadAction<IStatus>) {
+        setStatus(state, action: PayloadAction<AuthUserDataBoolean>) {
             state.status = action.payload
         },
-        setError(state, action) {
+        setError(state, action: PayloadAction<AuthUserDataString>) {
             state.error = action.payload
         }
 

@@ -6,10 +6,10 @@ import AuthIdn from '../../components/authIdn/AuthIdn';
 const MainPage = () => {
   return (
     <>
-        <NavBar>
+        {/* <NavBar>
             <Burger/>
             <AuthIdn/>
-        </NavBar>
+        </NavBar> */}
         <div>
           Main page
         </div>

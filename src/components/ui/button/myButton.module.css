@@ -1,7 +1,6 @@
 .btn {
     width: 100px;
     height: 35px;
-    font-size: 20px;
     background-color: #d6e3ec;
     border-radius: 3px;
     outline: #fff;
@@ -16,6 +15,13 @@
     color: #8ea1b4;
 
     transition: 200ms ease-in;
+}
+
+.btn.btnMini {
+    width: auto;
+    height: 35px;
+    font-size: 15px;
+    padding: 0 10px;
 }
 
 .btn:hover {
@@ -37,6 +43,7 @@
     display: inline-block;
     cursor: pointer;
     text-align: center;
+    margin-bottom: 10px;
 
     width: 100%;
     outline: none;
@@ -47,4 +54,11 @@
 
 .formButton:hover {
     background-color: #3492c5;
+}
+
+.signUp {
+    background-color: #420404;
+}
+.signUp:hover {
+    background-color: #2e0303;
 }

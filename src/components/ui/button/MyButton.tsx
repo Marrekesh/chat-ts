@@ -1,11 +1,5 @@
 import c from './myButton.module.css'
-
-interface IButton {
-    props?: string[]
-    children: React.ReactNode
-    className: string,
-    onClick?: (e: any) => void
-}
+import {IButton} from '../../../types/componentsType'
 
 const MyButton = ({children, className, ...props}: IButton) => {
 
@@ -15,5 +9,4 @@ const MyButton = ({children, className, ...props}: IButton) => {
         </button>
     )
 }
-//className={c.formButton}
 export default MyButton

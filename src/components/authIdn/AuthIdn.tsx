@@ -1,6 +1,9 @@
+import { FC } from 'react'
 import c from './authidn.module.css'
+import MyButton from '../ui/button/MyButton'
+import btnClass from '../ui/button/myButton.module.css'
 
-const AuthIdn = () => {
+const AuthIdn: FC = () => {
 
         return (
 
@@ -15,6 +18,7 @@ const AuthIdn = () => {
                     <div className={c.status}>
                         <div className={c.statusText}>Avaliable</div> 
                         <div className={c.statusArrow}>&lsaquo;</div>
+                        <MyButton className={`${btnClass.btn} ${btnClass.btnMini}`}>Logout</MyButton>
                     </div>
                 </div>
             </div>

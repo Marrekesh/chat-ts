@@ -1,6 +1,7 @@
+import { FC } from 'react'
 import c from './burger.module.css'
 
-const Burger = () => {
+const Burger: FC = () => {
 
 		const active = false
 

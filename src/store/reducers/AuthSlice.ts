@@ -1,16 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import {LoginState} from '../../models/IUser'
+import {LoginState,  AuthState } from '../../types/stateTypes'
+import { AuthUserDataString, AuthUserDataBoolean } from '../../types/actionsTypes'
 
-interface AuthState {
-    loginState: LoginState,
-    isLoading?: boolean,
-    error?: string
-}
 
 const initialState: AuthState = {
     loginState: {email: '', password: ''},
     isLoading: false,
-    error:''
+    error:'',
+    status: false
 
 }
 
@@ -26,12 +23,13 @@ export const authSlice = createSlice({
         removeLoginState(state) {
             state.loginState = {email: '', password: ''}
         },
-        setLoading(state, action) {
+        setLoading(state, action: PayloadAction<AuthUserDataBoolean>) {
             state.isLoading = action.payload
         },
-        setError(state, action) {
+        setError(state, action: PayloadAction<AuthUserDataString>) {
             state.error = action.payload
-        }
+        },
+
 
     }
 })
@@ -42,5 +40,5 @@ export const {
     setLoginState,
     removeLoginState,
     setLoading,
-    setError
+    setError,
 } = authSlice.actions;

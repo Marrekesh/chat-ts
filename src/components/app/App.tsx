@@ -1,15 +1,14 @@
 
 import './App.css';
-import NavBar from '../navbar/NavBar';
 import AuthRoutes from '../../routes/AuthRoutes';
+import NavBar from '../navbar/NavBar';
 
 function App() {
-
-
+	
 
 	return (
 		<div className="App">
-			{/* <NavBar/> */}
+			<NavBar/>
 			<AuthRoutes/>
 		</div>
 	);

@@ -1,12 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import {IUser} from '../../models/IUser'
+import { UserState } from '../../types/stateTypes'
+import { AuthUserDataString, AuthUserDataBoolean } from '../../types/actionsTypes'
 
-interface UserState {
-    id: string,
-    email: string | null
-    isLoading?: boolean,
-    error?: string
-}
 
 const initialState: UserState = {
     id: '',
@@ -23,14 +18,14 @@ export const userSlice = createSlice({
             state.id = action.payload.id
             state.email = action.payload.email
         },
-        setLoading(state, action) {
+        setLoading(state, action: PayloadAction<AuthUserDataBoolean>) {
             state.isLoading = action.payload
         },
         removeUser(state) {
             state.id = ''
             state.email = ''
         },
-        setError(state, action) {
+        setError(state, action: PayloadAction<AuthUserDataString>) {
             state.error = action.payload
         }
     }

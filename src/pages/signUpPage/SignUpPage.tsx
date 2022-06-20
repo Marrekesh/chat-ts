@@ -1,43 +1,39 @@
+import React, { FC } from "react"
 import Form from "../../components/ui/form/Form"
 import Input from "../../components/ui/input/Input"
 import MyButton from "../../components/ui/button/MyButton"
+import NavBar from '../../components/navbar/NavBar';
+import AlertBlock from "../../components/alert/AlertBlock"
+
+import { useAppSelector, useAppDispatch } from "../../hooks/redux"
+import { registerSlice, removeRegisterState} from "../../store/reducers/RegisterSlice"
+import { asyncRegistrAction } from "../../store/actionsCreator/asyncRegistration"
+import { Link } from 'react-router-dom'
+
 import classes from './signUpPage.module.css'
 import btn from '../../components/ui/button/myButton.module.css'
-import { useAppSelector, useAppDispatch } from "../../hooks/redux"
-import { registerSlice, removeRegisterState, setStatus} from "../../store/reducers/RegisterSlice"
-import React, { FC } from "react"
-import { asyncRegistrAction } from "../../store/actionsCreator/asyncRegistration"
-import ErrorBlock from "../../components/error/ErrorBlock"
-
-import { Link } from 'react-router-dom'
-import NavBar from '../../components/navbar/NavBar';
-
 import buttonClasses from '../../components/ui/button/myButton.module.css'
 
 const SignUpPage: FC = () => {
-	const loading = useAppSelector(state => state.registerStateReducer.isLoading)
+	const {isLoading, error, status} = useAppSelector(state => state.registerStateReducer)
 	const state = useAppSelector(state => state.registerStateReducer.registrState)
-	const error = useAppSelector(state => state.registerStateReducer.error)
-	const dispatch = useAppDispatch()
-	// const navigate = useNavigate()
 
+	const dispatch = useAppDispatch()
 
 	const addTextHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
 		dispatch(registerSlice.actions.setRegisterState({...state, [e.target.name]: e.target.value}))
 	}
 
-	const registerHendler = async (e: any) => {
+	const registerHendler = async (e: React.MouseEvent<HTMLButtonElement>) => {
 		try {
 			e.preventDefault()
 			await dispatch(asyncRegistrAction(state.email, state.password))
 			dispatch(removeRegisterState())
-			// navigate("/")
 		} catch (e) {
 			console.log('Handler down')
 		} 
 	}
-
-	const content = !loading 
+	const content = !isLoading 
 	?
 		<MyButton 
 			className={btn.formButton}
@@ -50,11 +46,11 @@ const SignUpPage: FC = () => {
 	return (
 
 		<>
-			<NavBar>
+			{/* <NavBar>
 				<Link to="/login">
 					<MyButton className={buttonClasses.btn}>Login</MyButton>
 				</Link>
-			</NavBar>
+			</NavBar> */}
 			<div className={classes.signUpPage}>
 				<Form title="Sign Up">
 					<Input
@@ -96,7 +92,8 @@ const SignUpPage: FC = () => {
 					/>
 					{content}
 				</Form>
-				{error ? <ErrorBlock>{error}</ErrorBlock> : null}
+				{error ? <AlertBlock>{error}</AlertBlock> : null}
+				{status ? <AlertBlock>User has been registred</AlertBlock> : null}
 			</div>
 		
 		</>

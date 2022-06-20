@@ -1,10 +1,6 @@
 import c from './form.module.css'
+import {IForm} from '../../../types/componentsType'
 
-interface IForm {
-    props?: any[],
-    title?: string
-    children: React.ReactNode
-}
 
 const Form = ({children, title, ...props}: IForm) => {
   
