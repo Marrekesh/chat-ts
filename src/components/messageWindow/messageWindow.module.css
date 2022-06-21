@@ -1,0 +1,18 @@
+.messageWindow {
+    padding: 30px 30px 0 30px;
+    width: 800px;
+}
+
+.messageHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.messageHeaderName {
+    font-family: Lato;
+    font-size: 18px;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: 0.025em;
+    color: #16315c;
+}

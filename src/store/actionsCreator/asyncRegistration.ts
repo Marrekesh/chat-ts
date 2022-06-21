@@ -2,32 +2,33 @@ import { AppDispatch } from "../store"
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
 import {setStatus, setLoading, setError} from "../reducers/RegisterSlice"
 import { AuthUserDataString } from "../../types/actionsTypes"
+import { errorChanger } from "../../services/errorChanger"
+import { auth, db } from "../../firebase/firebase"
+import { setDoc, doc, Timestamp } from "firebase/firestore"
+import { useAppSelector } from "../../hooks/redux"
+import { removeRegisterState } from "../reducers/RegisterSlice"
 // import { useNavigate } from "react-router-dom"
-export const asyncRegistrAction = (email: AuthUserDataString, password: AuthUserDataString) => async (dispatch: AppDispatch) => {
+export const asyncRegistrAction = (name: AuthUserDataString, surname: AuthUserDataString, link: AuthUserDataString, email: AuthUserDataString, password: AuthUserDataString) => async (dispatch: AppDispatch) => {
     
     try {
-        // dispatch(setLoading(true))
-        // const auth = getAuth()
-        // createUserWithEmailAndPassword(auth, email, password)
-        //     .then(({user}) => {
-        //       alert('ZAREGANO')
-        //     })
-        //     .catch((error) => {
-		// 		dispatch(setError(error.message))
-        //         setTimeout(() => {
-		// 			dispatch(setError(''))
-		// 		}, 2000)
-		// 	})
-
         dispatch(setLoading(true))
-        const auth = getAuth()
-        await createUserWithEmailAndPassword(auth, email, password)
+        // const auth = getAuth()
+        const response = await createUserWithEmailAndPassword(auth, email, password)
+        await setDoc(doc(db, 'users', response.user.uid), {
+            uid: response.user.uid,
+            name,
+            surname,
+            link,
+            createdAt: Timestamp.fromDate(new Date()),
+            isOnline: true
+        })
+        dispatch(removeRegisterState())
         dispatch(setStatus(true))
         setTimeout(() => {
             dispatch(setStatus(false))
         }, 2000)
     } catch (error: any) {
-        dispatch(setError(error.message))
+        dispatch(setError(errorChanger(error.message)))
         setTimeout(() => {
             dispatch(setError(''))
         }, 2000)

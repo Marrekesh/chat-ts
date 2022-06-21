@@ -13,8 +13,5 @@ body {
 }
   
 .App {
-	height: calc(100vh - 70px);
-	/* max-height: 600px; */
-	display: flex;
-	justify-content: center;
+	margin-top: 70px;
 }  

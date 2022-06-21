@@ -1,0 +1,77 @@
+.userListItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    padding: 0px 15px;
+    transition: 200ms ease-in-out;
+}
+
+.userListItem:hover {
+    background-color: #f5f6f8;
+}
+
+.userListItem:active {
+    background-color: #f5f6f8;
+}
+
+.image {
+    width: 40px;
+    height: 40px;
+    background-color: #f5f6f8;
+    object-fit: cover;
+    border-radius: 20px;
+    margin-right: 13px;
+}
+
+.textBlock {
+    display: flex;
+    flex-direction: column;
+}
+
+.textblockStatus {
+    display: flex;
+    justify-content: space-between;
+}
+
+.name {
+    font-family: Lato;
+    font-size: 16px;
+    font-weight: 700;
+    color: #34495e;
+}
+
+.status {
+    font-size: 20px;
+    color: grey;
+    color: #51dacf;
+}
+
+.status.active {
+    color: #51dacf;
+}
+
+.textblockMessge {
+    display: flex;
+    justify-content: space-between;
+}
+
+.message {
+    font-family: Lato;
+    width: 152px;
+    font-size: 12px;
+    line-height: 1.2;
+    font-weight: 400;
+    color: #8ea1b4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.time {
+    font-family: Lato;
+    font-size: 12px;
+    line-height: 1.2;
+    font-weight: 400;
+    color: #c9d6df;
+}

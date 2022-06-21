@@ -1,21 +1,20 @@
 import { Link } from 'react-router-dom'
-import NavBar from '../../components/navbar/NavBar';
-import Burger from '../../components/burger/Burger';
-import AuthIdn from '../../components/authIdn/AuthIdn';
+import c from './mainPage.module.css'
+import UsersBar from '../../components/usersBar/UsersBar'
+import MessageWindow from '../../components/messageWindow/MessageWindow'
+
 
 const MainPage = () => {
-  return (
-    <>
-        {/* <NavBar>
-            <Burger/>
-            <AuthIdn/>
-        </NavBar> */}
-        <div>
-          Main page
-        </div>
-    </>
+	return (
+		<>
 
-  )
+			<div className={c.mainPage}>
+				<UsersBar/>
+				<MessageWindow/>
+			</div>
+		</>
+
+	)
 }
 
 export default MainPage

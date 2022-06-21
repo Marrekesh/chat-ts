@@ -1,7 +1,6 @@
 import Form from "../../components/ui/form/Form"
 import Input from "../../components/ui/input/Input"
 import MyButton from "../../components/ui/button/MyButton"
-import NavBar from '../../components/navbar/NavBar';
 import AlertBlock from "../../components/alert/AlertBlock"
 
 import { asyncLoginAction } from "../../store/actionsCreator/asyncLoginAction"
@@ -10,24 +9,38 @@ import { authSlice, removeLoginState} from "../../store/reducers/AuthSlice"
 import { FC, useEffect} from "react"
 import { Link } from 'react-router-dom'
 import { setUser } from "../../store/reducers/UserSlice"
+import { onAuthStateChanged } from "firebase/auth"
+import { auth } from "../../firebase/firebase"
 
 import buttonClasses from '../../components/ui/button/myButton.module.css'
 import classes from './loginPage.module.css'
 import btn from '../../components/ui/button/myButton.module.css'
 
+
 const LoginPage: FC = () => {
 	const state = useAppSelector(state => state.authStateReducer.loginState)
-	const {error, status} = useAppSelector(state => state.authStateReducer)
+	const {error} = useAppSelector(state => state.authStateReducer)
 	const dispatch = useAppDispatch()
+	const {isLoading} = useAppSelector(state => state.userReducer)
 	useEffect(() => {
-		const data = JSON.parse(localStorage.getItem('userData') || "{}")
-		if (data && data.email) {
+		// const data = JSON.parse(localStorage.getItem('userData') || "{}")
+		// if (data && data.email) {
+		// 	dispatch(setUser({
+		// 		id: data.id,
+		// 		email: data.email
+		// 	}))
+		// }
+		onAuthStateChanged(auth, (user) => {
 			dispatch(setUser({
-				id: data.id,
-				email: data.email
+				id: user!.uid,
+				email: user!.email
 			}))
-		}
+		})
 	}, [])
+
+	if (isLoading) {
+		return <div>LOADING</div>
+	}
 
 	const addTextHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
 		dispatch(authSlice.actions.setLoginState({...state, [e.target.name]: e.target.value}))
@@ -45,11 +58,6 @@ const LoginPage: FC = () => {
 
 	return (
 		<>
-
-				
-				
-				
-
 			<div className={classes.loginPage}>
 				<Form title="Login">
 					<Input

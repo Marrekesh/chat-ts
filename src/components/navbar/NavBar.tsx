@@ -26,7 +26,7 @@ const NavBar = () => {
         return (
             <div className={c.navbar}>
                 <nav className={navClasses}>
-                 <Burger/>
+                <Burger/>
                 <AuthIdn/>
                 </nav> 
             </div>

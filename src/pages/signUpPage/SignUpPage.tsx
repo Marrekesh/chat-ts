@@ -6,18 +6,17 @@ import NavBar from '../../components/navbar/NavBar';
 import AlertBlock from "../../components/alert/AlertBlock"
 
 import { useAppSelector, useAppDispatch } from "../../hooks/redux"
-import { registerSlice, removeRegisterState} from "../../store/reducers/RegisterSlice"
+import { registerSlice} from "../../store/reducers/RegisterSlice"
 import { asyncRegistrAction } from "../../store/actionsCreator/asyncRegistration"
-import { Link } from 'react-router-dom'
 
 import classes from './signUpPage.module.css'
 import btn from '../../components/ui/button/myButton.module.css'
-import buttonClasses from '../../components/ui/button/myButton.module.css'
+
 
 const SignUpPage: FC = () => {
 	const {isLoading, error, status} = useAppSelector(state => state.registerStateReducer)
 	const state = useAppSelector(state => state.registerStateReducer.registrState)
-
+	const {name, surname, link} = useAppSelector(data => data.registerStateReducer.registrState)
 	const dispatch = useAppDispatch()
 
 	const addTextHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,8 +26,7 @@ const SignUpPage: FC = () => {
 	const registerHendler = async (e: React.MouseEvent<HTMLButtonElement>) => {
 		try {
 			e.preventDefault()
-			await dispatch(asyncRegistrAction(state.email, state.password))
-			dispatch(removeRegisterState())
+			await dispatch(asyncRegistrAction(name, surname, link, state.email, state.password, ))
 		} catch (e) {
 			console.log('Handler down')
 		} 
@@ -46,11 +44,6 @@ const SignUpPage: FC = () => {
 	return (
 
 		<>
-			{/* <NavBar>
-				<Link to="/login">
-					<MyButton className={buttonClasses.btn}>Login</MyButton>
-				</Link>
-			</NavBar> */}
 			<div className={classes.signUpPage}>
 				<Form title="Sign Up">
 					<Input
@@ -93,7 +86,6 @@ const SignUpPage: FC = () => {
 					{content}
 				</Form>
 				{error ? <AlertBlock>{error}</AlertBlock> : null}
-				{status ? <AlertBlock>User has been registred</AlertBlock> : null}
 			</div>
 		
 		</>

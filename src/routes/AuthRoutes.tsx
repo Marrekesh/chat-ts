@@ -7,9 +7,9 @@ import LoginPage from "../pages/loginPage/LoginPage";
 import SignUpPage from "../pages/signUpPage/SignUpPage";
 import { privateRoutes, publicRoutes, RouteNames } from "./routes";
 import { useAuth } from "../hooks/useAuth";
-
+import { useAppSelector } from "../hooks/redux";
 const AuthRoutes = () => {
-
+ 
     const {isAuth} = useAuth()
 
     return (
