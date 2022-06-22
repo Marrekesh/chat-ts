@@ -29,6 +29,9 @@ export const authSlice = createSlice({
         setError(state, action: PayloadAction<AuthUserDataString>) {
             state.error = action.payload
         },
+        setStatus(state, action: PayloadAction<AuthUserDataBoolean>) {
+            state.status = action.payload
+        },
 
 
     }
@@ -41,4 +44,5 @@ export const {
     removeLoginState,
     setLoading,
     setError,
+    setStatus
 } = authSlice.actions;

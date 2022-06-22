@@ -2,7 +2,10 @@ import c from './loader.module.css'
 
 const Loader: React.FC = () => {
     return (
-        <div className={c.ldsHourglass}></div>
+        <div className={c.loaderWrapper}>
+            <div className={c.ldsHourglass}></div>
+        </div>
+
     )
 }
 

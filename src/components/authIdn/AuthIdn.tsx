@@ -7,18 +7,24 @@ import { removeUser } from '../../store/reducers/UserSlice'
 import { signOut } from "firebase/auth"
 import { auth, db } from '../../firebase/firebase'
 import { updateDoc, doc } from 'firebase/firestore'
+import { Link } from 'react-router-dom'
+import { setStatus } from '../../store/reducers/AuthSlice'
 
+import buttonClasses from '../ui/button/myButton.module.css'
 
 const AuthIdn: FC = () => {
         const dispatch = useAppDispatch()
+
         const logoutHandler = async () => {
             await updateDoc(doc(db, 'users', auth.currentUser!.uid), {
                 isOnline: false
             })
             await signOut(auth)
             dispatch(removeUser())
+            dispatch(setStatus(false))
             localStorage.removeItem('userData')
         }
+
         return (
             <>       
             <div className={c.wrapper}>
@@ -35,6 +41,9 @@ const AuthIdn: FC = () => {
                     </div>
                 </div>
                 <MyButton onClick={logoutHandler} className={`${btnClass.btn} ${btnClass.btnMini}`}>Logout</MyButton>
+                <Link to="/profile">
+                        <MyButton className={buttonClasses.btn}>Profile</MyButton>
+                </Link>
             </div>
             </>
 

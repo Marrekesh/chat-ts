@@ -1,11 +1,15 @@
 .messageWindow {
     padding: 30px 30px 0 30px;
-    width: 800px;
+    width: 100%;
+    height: 800px;
+    /* border: 1px solid black; */
+    
 }
 
 .messageHeader {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 .messageHeaderName {
@@ -15,4 +19,17 @@
     font-weight: 700;
     letter-spacing: 0.025em;
     color: #16315c;
+}
+
+.messageItemWrapper {
+    position: relative;
+    height: 600px;
+    /* border: 1px solid blue; */
+    padding: 10px;
+    overflow-y: scroll;
+    margin-bottom: 40px;
+}
+
+.messageItemWrapper::-webkit-scrollbar {
+     width: 0; 
 }

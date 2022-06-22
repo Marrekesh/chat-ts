@@ -2,6 +2,7 @@
 import './App.css';
 import AuthRoutes from '../../routes/AuthRoutes';
 import NavBar from '../navbar/NavBar';
+import Loader from '../loader/Loader';
 
 function App() {
 
@@ -10,6 +11,7 @@ function App() {
 			<div className="App">
 				<NavBar/>
 				<AuthRoutes/>
+				{/* <Loader/> */}
 			</div>
 	);
 }

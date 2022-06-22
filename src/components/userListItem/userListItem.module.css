@@ -66,6 +66,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    padding-right: 5px;
 }
 
 .time {

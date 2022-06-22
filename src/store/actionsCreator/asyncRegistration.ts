@@ -17,6 +17,7 @@ export const asyncRegistrAction = (name: AuthUserDataString, surname: AuthUserDa
         await setDoc(doc(db, 'users', response.user.uid), {
             uid: response.user.uid,
             name,
+            email,
             surname,
             link,
             createdAt: Timestamp.fromDate(new Date()),

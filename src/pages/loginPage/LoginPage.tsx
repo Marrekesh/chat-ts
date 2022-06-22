@@ -2,6 +2,7 @@ import Form from "../../components/ui/form/Form"
 import Input from "../../components/ui/input/Input"
 import MyButton from "../../components/ui/button/MyButton"
 import AlertBlock from "../../components/alert/AlertBlock"
+import Loader from "../../components/loader/Loader"
 
 import { asyncLoginAction } from "../../store/actionsCreator/asyncLoginAction"
 import { useAppSelector, useAppDispatch } from "../../hooks/redux"
@@ -11,6 +12,7 @@ import { Link } from 'react-router-dom'
 import { setUser } from "../../store/reducers/UserSlice"
 import { onAuthStateChanged } from "firebase/auth"
 import { auth } from "../../firebase/firebase"
+import { setStatus } from "../../store/reducers/AuthSlice"
 
 import buttonClasses from '../../components/ui/button/myButton.module.css'
 import classes from './loginPage.module.css'
@@ -22,25 +24,38 @@ const LoginPage: FC = () => {
 	const {error} = useAppSelector(state => state.authStateReducer)
 	const dispatch = useAppDispatch()
 	const {isLoading} = useAppSelector(state => state.userReducer)
+	const status = useAppSelector(state => state.authStateReducer.status)
+	
+	
 	useEffect(() => {
-		// const data = JSON.parse(localStorage.getItem('userData') || "{}")
+		const data = JSON.parse(localStorage.getItem('userData') || "{}")
 		// if (data && data.email) {
-		// 	dispatch(setUser({
-		// 		id: data.id,
-		// 		email: data.email
-		// 	}))
+			dispatch(setUser({
+				id: data.id,
+				email: data.email
+			}))
 		// }
 		onAuthStateChanged(auth, (user) => {
+			// console.log(user?.uid)
+			// console.log(user?.email)
+			// if(data.id === user!.uid) {
+			// 	dispatch(setUser({
+			// 		id: data.id,
+			// 		email: data.email
+			// 	}))
+			// }
+
 			dispatch(setUser({
 				id: user!.uid,
 				email: user!.email
 			}))
+			// dispatch(setStatus(true))
 		})
 	}, [])
 
-	if (isLoading) {
-		return <div>LOADING</div>
-	}
+	// if (status) {
+	// 	return <Loader/>
+	// }
 
 	const addTextHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
 		dispatch(authSlice.actions.setLoginState({...state, [e.target.name]: e.target.value}))
@@ -56,7 +71,7 @@ const LoginPage: FC = () => {
 		} 
 	}
 
-	return (
+	return  (
 		<>
 			<div className={classes.loginPage}>
 				<Form title="Login">
@@ -84,7 +99,7 @@ const LoginPage: FC = () => {
 				{error ? <AlertBlock>{error}</AlertBlock> : null}
 			</div>
 		</>
-	)
+	) 
 }
 
 export default LoginPage

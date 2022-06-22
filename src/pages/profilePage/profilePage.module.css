@@ -1,0 +1,61 @@
+.profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+}
+
+.profileContainer {
+    display: flex;
+    align-items: center;
+    width: 500px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.imgContainer {
+    position: relative;
+    margin-right: 20px;
+}
+
+.imgContainer img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 1px solid #000;
+    transition: 0.5s ease-in-out;
+    object-fit: cover;
+}
+
+.imgContainer:hover img {
+    opacity: 0.4;
+}
+
+.imgContainer:hover .overlay {
+    opacity: 1;
+}
+
+.overlay {
+    transition: 0.5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.textContainer {
+    flex-grow: 1;
+}
+
+.textContainer h3 {
+    font-family: Lato;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.photoInput {
+    display: none;
+}
