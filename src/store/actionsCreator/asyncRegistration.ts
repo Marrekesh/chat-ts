@@ -24,10 +24,10 @@ export const asyncRegistrAction = (name: AuthUserDataString, surname: AuthUserDa
             isOnline: true
         })
         dispatch(removeRegisterState())
-        dispatch(setStatus(true))
-        setTimeout(() => {
-            dispatch(setStatus(false))
-        }, 2000)
+        // dispatch(setStatus(true))
+        // setTimeout(() => {
+        //     dispatch(setStatus(false))
+        // }, 2000)
     } catch (error: any) {
         dispatch(setError(errorChanger(error.message)))
         setTimeout(() => {

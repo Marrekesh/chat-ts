@@ -1,18 +1,23 @@
 
-import './App.css';
+
 import AuthRoutes from '../../routes/AuthRoutes';
 import NavBar from '../navbar/NavBar';
-import Loader from '../loader/Loader';
+import {BrowserRouter as Router} from "react-router-dom";
 
+import WrapperComponent from '../wrapperComponent/WrapperComponent';
+import './App.css';
+import 'typeface-lato'
 function App() {
 
-
 	return (
-			<div className="App">
+
+		<WrapperComponent>
+			<Router>
 				<NavBar/>
 				<AuthRoutes/>
-				{/* <Loader/> */}
-			</div>
+			</Router>
+		</WrapperComponent>	
+
 	);
 }
 

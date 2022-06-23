@@ -6,7 +6,7 @@ import { AuthUserDataString } from "../../types/actionsTypes"
 import { errorChanger } from "../../services/errorChanger"
 import { auth, db } from "../../firebase/firebase"
 import { doc,  updateDoc } from "firebase/firestore"
-
+import { setMainUserLoading } from "../reducers/MainUserSlice"
 export const asyncLoginAction = (email: AuthUserDataString, password: AuthUserDataString) => async (dispatch: AppDispatch) => {
     
     try {

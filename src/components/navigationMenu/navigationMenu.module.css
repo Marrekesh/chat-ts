@@ -1,0 +1,42 @@
+.navigationMenu {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 10px;
+
+
+    top: calc(450px);
+    right: 20px;
+    padding: 5px;
+}
+
+.navigationMenuItem {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+    padding: 3px;
+    border-radius: 50%;
+    transition: 0.5s all ease;
+
+
+}
+.navigationMenuItem:hover {
+    background-color: #000; 
+ 
+ }
+
+.navigationMenuItem + .navIcon:hover   {
+   background-color: #fff; 
+
+}
+
+.navIcon {
+    color: #000;
+}
+/* .navIcon:hover {
+    color: #fff;
+} */

@@ -11,7 +11,7 @@ export interface IRoute {
 
 export enum RouteNames {
     LOGIN = '/login',
-    DEFAULT = '/*',
+    DEFAULT = '*',
     REGISTRATION = '/registration',
     MAIN_PAGE = '/main',
     PROFILE = '/profile'
@@ -23,7 +23,7 @@ export const publicRoutes: Array<IRoute> = [
     {path: RouteNames.DEFAULT, component: LoginPage}
 ]
 
-export const privateRoutes: IRoute[] = [
+export const privateRoutes: Array<IRoute> = [
     {path: RouteNames.MAIN_PAGE, component: MainPage},
     {path: RouteNames.PROFILE, component: Profile},
     {path: RouteNames.DEFAULT, component: MainPage}

@@ -13,7 +13,7 @@ import { setUser } from "../../store/reducers/UserSlice"
 import { onAuthStateChanged } from "firebase/auth"
 import { auth } from "../../firebase/firebase"
 import { setStatus } from "../../store/reducers/AuthSlice"
-
+import { useNavigate } from "react-router-dom";
 import buttonClasses from '../../components/ui/button/myButton.module.css'
 import classes from './loginPage.module.css'
 import btn from '../../components/ui/button/myButton.module.css'
@@ -25,33 +25,33 @@ const LoginPage: FC = () => {
 	const dispatch = useAppDispatch()
 	const {isLoading} = useAppSelector(state => state.userReducer)
 	const status = useAppSelector(state => state.authStateReducer.status)
+	const navigate = useNavigate()
 	
-	
-	useEffect(() => {
-		const data = JSON.parse(localStorage.getItem('userData') || "{}")
-		// if (data && data.email) {
-			dispatch(setUser({
-				id: data.id,
-				email: data.email
-			}))
-		// }
-		onAuthStateChanged(auth, (user) => {
-			// console.log(user?.uid)
-			// console.log(user?.email)
-			// if(data.id === user!.uid) {
-			// 	dispatch(setUser({
-			// 		id: data.id,
-			// 		email: data.email
-			// 	}))
-			// }
-
-			dispatch(setUser({
-				id: user!.uid,
-				email: user!.email
-			}))
-			// dispatch(setStatus(true))
-		})
-	}, [])
+	// useEffect(() => {
+	// 	const data = JSON.parse(localStorage.getItem('userData') || "{}")
+	// 	// if (data && data.email) {
+	// 		// dispatch(setUser({
+	// 		// 	id: data.id,
+	// 		// 	email: data.email
+	// 		// }))
+	// 	// }
+	// 	onAuthStateChanged(auth, (user) => {
+	// 		// console.log(user?.uid)
+	// 		// console.log(user?.email)
+	// 		// if(data.id === user!.uid) {
+	// 		// 	dispatch(setUser({
+	// 		// 		id: data.id,
+	// 		// 		email: data.email
+	// 		// 	}))
+	// 		// }
+	// 		console.log(user)
+	// 		dispatch(setUser({
+	// 			id: user!.uid,
+	// 			email: user!.email
+	// 		}))
+	// 		// dispatch(setStatus(true))
+	// 	})
+	// }, [])
 
 	// if (status) {
 	// 	return <Loader/>
@@ -66,6 +66,7 @@ const LoginPage: FC = () => {
 			e.preventDefault()
 			await dispatch(asyncLoginAction(state.email, state.password))
 			dispatch(removeLoginState())
+			navigate('/main')
 		} catch (e) {
 			console.log('Handler down')
 		} 
@@ -94,7 +95,7 @@ const LoginPage: FC = () => {
 						onClick={loginHendler}
 						>Login
 					</MyButton>
-					<Link to="/registration"><MyButton className={`${buttonClasses.formButton} ${buttonClasses.signUp}`}>Sign Up</MyButton></Link>
+					{/* <Link to="/registration"><MyButton className={`${buttonClasses.formButton} ${buttonClasses.signUp}`}>Sign Up</MyButton></Link> */}
 				</Form>
 				{error ? <AlertBlock>{error}</AlertBlock> : null}
 			</div>

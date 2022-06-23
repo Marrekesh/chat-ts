@@ -1,6 +1,5 @@
 import { useAppSelector, useAppDispatch } from "./redux";
-import { useCallback, useEffect } from "react";
-import {setUser} from '../store/reducers/UserSlice'
+
 
 type IStorage = string
 const storageName: IStorage = 'userData'

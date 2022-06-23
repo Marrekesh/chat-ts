@@ -16,13 +16,7 @@ const Profile: FC = () => {
 	const navigate = useNavigate()
 	//In rules of fitestom for loading img
 
-	// service firebase.storage {
-	// 	match /b/{bucket}/o {
-	// 	  match /{allPaths=**} {
-	// 		allow read, write: if request.auth != null;
-	// 	  }
-	// 	}
-	//   }
+
 
 	useEffect(() => {
 		getDoc(doc(db, 'users', auth.currentUser!.uid)).then((docSnap) => {

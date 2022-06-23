@@ -26,7 +26,6 @@
 
 .barLine {
     display: block;
-    height: 1px;
     background-color: #edf0f2;
     padding: 0 15px;
 }

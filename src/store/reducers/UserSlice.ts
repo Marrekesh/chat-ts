@@ -3,7 +3,7 @@ import { UserState } from '../../types/stateTypes'
 import { AuthUserDataString, AuthUserDataBoolean } from '../../types/actionsTypes'
 
 
-const initialState: UserState = {
+const initialState: any = {
     id: '',
     email: '',
     isLoading: false,

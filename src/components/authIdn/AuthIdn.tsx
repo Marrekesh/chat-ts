@@ -9,11 +9,13 @@ import { auth, db } from '../../firebase/firebase'
 import { updateDoc, doc } from 'firebase/firestore'
 import { Link } from 'react-router-dom'
 import { setStatus } from '../../store/reducers/AuthSlice'
-
+import { setMainUserLoading } from '../../store/reducers/MainUserSlice'
 import buttonClasses from '../ui/button/myButton.module.css'
+import { useNavigate } from 'react-router-dom'
 
 const AuthIdn: FC = () => {
         const dispatch = useAppDispatch()
+        const navigate = useNavigate()
 
         const logoutHandler = async () => {
             await updateDoc(doc(db, 'users', auth.currentUser!.uid), {
@@ -21,8 +23,11 @@ const AuthIdn: FC = () => {
             })
             await signOut(auth)
             dispatch(removeUser())
-            dispatch(setStatus(false))
-            localStorage.removeItem('userData')
+            navigate('/login')
+            // dispatch(setStatus(false))
+            // localStorage.removeItem('userData')
+
+            // dispatch(setMainUserLoading(false))
         }
 
         return (
