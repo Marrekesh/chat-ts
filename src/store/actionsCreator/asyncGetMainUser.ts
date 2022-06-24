@@ -2,21 +2,37 @@ import { AppDispatch } from "../store"
 import { AuthUserDataString } from "../../types/actionsTypes"
 import { errorChanger } from "../../services/errorChanger"
 import { auth, db } from "../../firebase/firebase"
-import { doc,  updateDoc } from "firebase/firestore"
-
+import { doc,  updateDoc, getDoc } from "firebase/firestore"
+import { IUser } from "../reducers/UserSlice"
 //new
 import { onAuthStateChanged } from "firebase/auth"
 import { setMainUser, setMainUserError, setMainUserLoading } from "../reducers/MainUserSlice"
 import { setUser } from "../reducers/UserSlice"
+import { useAuth } from "../../hooks/useAuth"
 
 export const asyncGetMainUserAction = () => async (dispatch: AppDispatch) => {
-    try { 
+    console.log('run')
+    try {
+        // 
         onAuthStateChanged(auth, async (user) => {
-
-            dispatch(setUser({email :user!.email, id: user!.uid}))
-
+            
+            if (user?.uid && user?.email) {
+                dispatch(setMainUserLoading(true)) 
+                // dispatch(setUser({name: user.name, surname: user.surname, email: user.email, id: user.uid, isOnline: user.isOnline}))
+                await getDoc( doc(db, 'users', auth.currentUser!.uid)).then((docSnap) => {
+                    if (docSnap.exists()) {
+                        const data = docSnap.data()
+                        // dispatch(setMainUserLoading(true)) 
+                        dispatch(setUser({name: data.name, surname: data.surname, email: data.email, id: data.uid, isOnline: data.isOnline }))
+                        // dispatch(setMainUserLoading(false))
+                        
+                    }
+        
+                }).finally(() => {
+                    dispatch(setMainUserLoading(false))
+                })  
+            }
 		})
-
 		// localStorage.setItem('userData', JSON.stringify({id: response.user.uid, email: response.user.uid}))
     } catch (error: any) {
         dispatch(setMainUserError(error.message))
@@ -24,5 +40,6 @@ export const asyncGetMainUserAction = () => async (dispatch: AppDispatch) => {
 		// 	dispatch(setError(''))
 		// }, 2000)
         setMainUserError('')
+        dispatch(setMainUserLoading(false))
     } 
 }

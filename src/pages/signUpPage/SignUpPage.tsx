@@ -16,7 +16,7 @@ import btn from '../../components/ui/button/myButton.module.css'
 const SignUpPage: FC = () => {
 	const {isLoading, error, status} = useAppSelector(state => state.registerStateReducer)
 	const state = useAppSelector(state => state.registerStateReducer.registrState)
-	const {name, surname, link} = useAppSelector(data => data.registerStateReducer.registrState)
+	const {name, surname} = useAppSelector(data => data.registerStateReducer.registrState)
 	const dispatch = useAppDispatch()
 
 	const addTextHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +26,7 @@ const SignUpPage: FC = () => {
 	const registerHendler = async (e: React.MouseEvent<HTMLButtonElement>) => {
 		try {
 			e.preventDefault()
-			await dispatch(asyncRegistrAction(name, surname, link, state.email, state.password, ))
+			await dispatch(asyncRegistrAction(name, surname, state.email, state.password, ))
 		} catch (e) {
 			console.log('Handler down')
 		} 
@@ -74,13 +74,6 @@ const SignUpPage: FC = () => {
 						placeholder="Password" 
 
 						value={state.password}
-						onChange={addTextHandler}
-					/>
-					<Input
-						name='link' 
-						type="text" 
-						placeholder="Link on avatar"
-						value={state.link}
 						onChange={addTextHandler}
 					/>
 					{content}

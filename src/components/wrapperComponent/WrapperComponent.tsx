@@ -10,15 +10,11 @@ const WrapperComponent = ({children}: any) => {
     const loading = useAppSelector(state => state.mainUserReduser.loading)
     const dispatch = useAppDispatch()
     const {isAuth} = useAuth()
-    
-    useEffect(() => {
-        dispatch(setMainUserLoading(true))
-       
-        dispatch(asyncGetMainUserAction())
+    const online = useAppSelector(state => state.userReducer.user.isOnline)
 
-        setTimeout(() => {
-            dispatch(setMainUserLoading(false))
-        }, 500)
+    useEffect(() => {
+        // dispatch(setMainUserLoading(true))
+            dispatch(asyncGetMainUserAction())
     }, [])
 
     if (loading) {

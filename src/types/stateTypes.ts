@@ -27,7 +27,6 @@ export interface RegistrState {
     password: AuthUserDataString
     name: AuthUserDataString,
     surname: AuthUserDataString,
-    link: AuthUserDataString
 }
 
 export interface RegisterState {

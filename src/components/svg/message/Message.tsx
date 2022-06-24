@@ -4,7 +4,6 @@ import c from '../../navigationMenu/navigationMenu.module.css'
 const Message = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" 
-        style={{width: '20px', height: '20px', cursor: 'pointer'}}
         className={c.navIcon}
         viewBox="0 0 20 20" 
         fill="currentColor"

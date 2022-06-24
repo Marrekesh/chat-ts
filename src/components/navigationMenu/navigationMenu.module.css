@@ -29,13 +29,15 @@
  
  }
 
-.navigationMenuItem + .navIcon:hover   {
-   background-color: #fff; 
-
+.navigationMenuItem:hover  .navIcon   {
+   color: #fff; 
 }
 
 .navIcon {
     color: #000;
+    width: 20px; 
+    height: 20px; 
+    cursor: pointer
 }
 /* .navIcon:hover {
     color: #fff;

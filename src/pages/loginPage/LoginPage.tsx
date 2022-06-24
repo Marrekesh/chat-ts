@@ -2,7 +2,7 @@ import Form from "../../components/ui/form/Form"
 import Input from "../../components/ui/input/Input"
 import MyButton from "../../components/ui/button/MyButton"
 import AlertBlock from "../../components/alert/AlertBlock"
-import Loader from "../../components/loader/Loader"
+import Spinner from "../../components/spinner/Spinner"
 
 import { asyncLoginAction } from "../../store/actionsCreator/asyncLoginAction"
 import { useAppSelector, useAppDispatch } from "../../hooks/redux"
@@ -15,18 +15,22 @@ import { auth } from "../../firebase/firebase"
 import { setStatus } from "../../store/reducers/AuthSlice"
 import { useNavigate } from "react-router-dom";
 import buttonClasses from '../../components/ui/button/myButton.module.css'
+import { setLoading } from "../../store/reducers/AuthSlice"
+
+
 import classes from './loginPage.module.css'
 import btn from '../../components/ui/button/myButton.module.css'
-
 
 const LoginPage: FC = () => {
 	const state = useAppSelector(state => state.authStateReducer.loginState)
 	const {error} = useAppSelector(state => state.authStateReducer)
 	const dispatch = useAppDispatch()
-	const {isLoading} = useAppSelector(state => state.userReducer)
+	const {isLoading} = useAppSelector(state => state.authStateReducer)
 	const status = useAppSelector(state => state.authStateReducer.status)
+
 	const navigate = useNavigate()
 	
+
 	// useEffect(() => {
 	// 	const data = JSON.parse(localStorage.getItem('userData') || "{}")
 	// 	// if (data && data.email) {
@@ -64,13 +68,22 @@ const LoginPage: FC = () => {
 	const loginHendler = async (e: React.MouseEvent<HTMLButtonElement>) => {
 		try {
 			e.preventDefault()
+			dispatch(setLoading(true))
 			await dispatch(asyncLoginAction(state.email, state.password))
 			dispatch(removeLoginState())
 			navigate('/main')
 		} catch (e) {
 			console.log('Handler down')
-		} 
+		} finally {
+			dispatch(setLoading(false))
+		}
 	}
+
+	const spinnerOrButton = isLoading ? <Spinner/> : <MyButton 
+														className={btn.formButton}
+														onClick={loginHendler}
+														>Login
+													 </MyButton>
 
 	return  (
 		<>
@@ -90,11 +103,12 @@ const LoginPage: FC = () => {
 						value={state.password}
 						onChange={addTextHandler}
 					/>
-					<MyButton 
+					{/* <MyButton 
 						className={btn.formButton}
 						onClick={loginHendler}
 						>Login
-					</MyButton>
+					</MyButton> */}
+					{spinnerOrButton}
 					{/* <Link to="/registration"><MyButton className={`${buttonClasses.formButton} ${buttonClasses.signUp}`}>Sign Up</MyButton></Link> */}
 				</Form>
 				{error ? <AlertBlock>{error}</AlertBlock> : null}

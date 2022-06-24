@@ -5,7 +5,7 @@ import { setUser, } from "../reducers/UserSlice"
 import { AuthUserDataString } from "../../types/actionsTypes"
 import { errorChanger } from "../../services/errorChanger"
 import { auth, db } from "../../firebase/firebase"
-import { doc,  updateDoc } from "firebase/firestore"
+import { doc,  updateDoc, getDoc } from "firebase/firestore"
 import { setMainUserLoading } from "../reducers/MainUserSlice"
 export const asyncLoginAction = (email: AuthUserDataString, password: AuthUserDataString) => async (dispatch: AppDispatch) => {
     
@@ -15,7 +15,14 @@ export const asyncLoginAction = (email: AuthUserDataString, password: AuthUserDa
         await updateDoc(doc(db, 'users', response.user.uid), {
             isOnline: true
         })
-		dispatch(setUser({id: response.user.uid, email: response.user.email}))
+        await getDoc(doc(db, 'users', auth.currentUser!.uid)).then((docSnap) => {
+            if(docSnap.exists()) {
+                const data = docSnap.data()
+                dispatch(setUser({name: data.name, surname: data.surname, email: data.email, id: data.uid, isOnline: data.isOnline }))
+            }
+
+		})
+		
 		// localStorage.setItem('userData', JSON.stringify({id: response.user.uid, email: response.user.uid}))
     } catch (error: any) {
         dispatch(setError(errorChanger(error.message)))

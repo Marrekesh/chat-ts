@@ -5,7 +5,7 @@ import { AuthUserDataString, AuthUserDataBoolean } from '../../types/actionsType
 
 
 const initialState: RegisterState = {
-    registrState: {name: '', surname: '', link: '', email: '', password: ''},
+    registrState: {name: '', surname: '',  email: '', password: ''},
     status: false,
     isLoading: false,
     error:''
@@ -19,12 +19,11 @@ export const registerSlice = createSlice({
         setRegisterState(state, action: PayloadAction<RegistrState>) {
             state.registrState.name = action.payload.name
             state.registrState.surname = action.payload.surname
-            state.registrState.link = action.payload.link
             state.registrState.email = action.payload.email
             state.registrState.password = action.payload.password
         },
         removeRegisterState(state) {
-            state.registrState = {name: '', surname: '', link: '', email: '', password: ''}
+            state.registrState = {name: '', surname: '', email: '', password: ''}
         },
         setLoading(state, action: PayloadAction<AuthUserDataBoolean>) {
             state.isLoading = action.payload

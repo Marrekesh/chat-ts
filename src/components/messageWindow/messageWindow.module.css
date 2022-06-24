@@ -22,15 +22,25 @@
 }
 
 .messageItemWrapper {
+    /* display: flex; */
+    /* align-items: center; */
+    /* flex-direction: column; */
     position: relative;
     height: 600px;
+    background-color: #fff;
+    border-radius: 5px;
     /* border: 1px solid blue; */
-    padding: 10px;
+    padding: 20px;
     overflow-y: scroll;
     margin-bottom: 40px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .messageItemWrapper::-webkit-scrollbar {
-     width: 0; 
+     width: 3px;
+     background: #fff; 
+}
+.messageItemWrapper::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom right, #3598db, #16315c);
+    border-radius: 15px; 
 }

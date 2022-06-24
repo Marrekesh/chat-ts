@@ -15,10 +15,11 @@
 .nav {
     height: 100%;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    justify-content: flex-end;
     align-items: center;
 }
 
-.nav.navEnd {
+/* .nav.navEnd {
     justify-content: flex-end;
-}
+} */

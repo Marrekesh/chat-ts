@@ -8,7 +8,7 @@ import { setDoc, doc, Timestamp } from "firebase/firestore"
 import { useAppSelector } from "../../hooks/redux"
 import { removeRegisterState } from "../reducers/RegisterSlice"
 // import { useNavigate } from "react-router-dom"
-export const asyncRegistrAction = (name: AuthUserDataString, surname: AuthUserDataString, link: AuthUserDataString, email: AuthUserDataString, password: AuthUserDataString) => async (dispatch: AppDispatch) => {
+export const asyncRegistrAction = (name: AuthUserDataString, surname: AuthUserDataString,  email: AuthUserDataString, password: AuthUserDataString) => async (dispatch: AppDispatch) => {
     
     try {
         dispatch(setLoading(true))
@@ -19,7 +19,6 @@ export const asyncRegistrAction = (name: AuthUserDataString, surname: AuthUserDa
             name,
             email,
             surname,
-            link,
             createdAt: Timestamp.fromDate(new Date()),
             isOnline: true
         })

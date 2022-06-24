@@ -80,7 +80,7 @@ const NavBar: FC = () => {
         return (
             <div className={c.navbar}>
                 <nav className={navClasses}>
-                    <Burger/>
+                    {/* <Burger/> */}
                     <AuthIdn/>
                 </nav> 
                 <NavigationMenu/>
