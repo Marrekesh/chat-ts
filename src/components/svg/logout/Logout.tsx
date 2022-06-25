@@ -1,7 +1,7 @@
 import React from 'react'
 import c from '../../navigationMenu/navigationMenu.module.css'
 import { useAppDispatch } from '../../../hooks/redux'
-import { removeUser } from '../../../store/reducers/UserSlice'
+import { removeUser, removeLoginUser } from '../../../store/reducers/UserSlice'
 import { signOut } from "firebase/auth"
 import { auth, db } from '../../../firebase/firebase'
 import { updateDoc, doc } from 'firebase/firestore'
@@ -15,6 +15,7 @@ const Logout = () => {
         })
         await signOut(auth)
         dispatch(removeUser())
+        dispatch(removeLoginUser())
         // navigate('/login')
         // dispatch(setStatus(false))
         // localStorage.removeItem('userData')

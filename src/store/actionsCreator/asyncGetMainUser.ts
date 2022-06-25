@@ -7,7 +7,7 @@ import { IUser } from "../reducers/UserSlice"
 //new
 import { onAuthStateChanged } from "firebase/auth"
 import { setMainUser, setMainUserError, setMainUserLoading } from "../reducers/MainUserSlice"
-import { setUser } from "../reducers/UserSlice"
+import { setUser, setLoginUser } from "../reducers/UserSlice"
 import { useAuth } from "../../hooks/useAuth"
 
 export const asyncGetMainUserAction = () => async (dispatch: AppDispatch) => {
@@ -15,7 +15,7 @@ export const asyncGetMainUserAction = () => async (dispatch: AppDispatch) => {
     try {
         // 
         onAuthStateChanged(auth, async (user) => {
-            
+            console.log(user)
             if (user?.uid && user?.email) {
                 dispatch(setMainUserLoading(true)) 
                 // dispatch(setUser({name: user.name, surname: user.surname, email: user.email, id: user.uid, isOnline: user.isOnline}))
@@ -23,8 +23,11 @@ export const asyncGetMainUserAction = () => async (dispatch: AppDispatch) => {
                     if (docSnap.exists()) {
                         const data = docSnap.data()
                         // dispatch(setMainUserLoading(true)) 
-                        dispatch(setUser({name: data.name, surname: data.surname, email: data.email, id: data.uid, isOnline: data.isOnline }))
+                        dispatch(setUser({name: data.name, surname: data.surname, email: data.email, id: data.uid, isOnline: data.isOnline, avatar: data.avatar }))
                         // dispatch(setMainUserLoading(false))
+                        if (data.isOnline === true) {
+                            dispatch(setLoginUser({email: user.email, id: user.uid}))
+                        }
                         
                     }
         

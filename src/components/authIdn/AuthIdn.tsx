@@ -12,19 +12,21 @@ import { setStatus } from '../../store/reducers/AuthSlice'
 import { setMainUserLoading } from '../../store/reducers/MainUserSlice'
 import buttonClasses from '../ui/button/myButton.module.css'
 import { useNavigate } from 'react-router-dom'
+import { useAppSelector } from '../../hooks/redux'
+
 
 const AuthIdn: FC = () => {
+    const {name, avatar} = useAppSelector(state => state.userReducer.user)
 
-
-        return (
-            <>       
+    return (
+        <>       
             <div className={c.wrapper}>
-                <img className={c.img} src="https://i.pinimg.com/736x/b3/a6/32/b3a632a5547d22c553075514add449db.jpg" alt="user" />
+                <img className={c.img} src={avatar || require('../../images/img-not-found.jpg')} alt="user" />
                 <div className={c.info}>
                     <div className="named">
-                        <span className={c.name}>Doronin</span>
-                        <span className={c.name}>Dmytro</span>
-                        <span className={c.name}>Romanovich</span>
+                        <span className={c.name}>{name}</span>
+                        {/* <span className={c.name}>Dmytro</span>
+                        <span className={c.name}>Romanovich</span> */}
                     </div>
                     <div className={c.status}>
                         <div className={c.statusText}>Avaliable</div> 
@@ -32,7 +34,7 @@ const AuthIdn: FC = () => {
                     </div>
                 </div>
             </div>
-            </>
+        </>
 
         )
 

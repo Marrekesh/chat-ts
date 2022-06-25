@@ -6,7 +6,7 @@ const storageName: IStorage = 'userData'
 
 export function useAuth() {
     const dispatch = useAppDispatch()
-    const {id, email} = useAppSelector(state => state.userReducer.user)
+    const {id, email} = useAppSelector(state => state.userReducer.loginUser)
     
     return {
         isAuth: !!email,
