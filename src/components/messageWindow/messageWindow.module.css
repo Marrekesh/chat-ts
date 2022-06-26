@@ -53,3 +53,13 @@
     background: linear-gradient(to bottom right, #3598db, #16315c);
     border-radius: 15px; 
 }
+
+
+.infoBLock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+}

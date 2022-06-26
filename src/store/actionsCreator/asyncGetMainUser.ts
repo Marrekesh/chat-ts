@@ -15,7 +15,6 @@ export const asyncGetMainUserAction = () => async (dispatch: AppDispatch) => {
     try {
         // 
         onAuthStateChanged(auth, async (user) => {
-            console.log(user)
             if (user?.uid && user?.email) {
                 dispatch(setMainUserLoading(true)) 
                 // dispatch(setUser({name: user.name, surname: user.surname, email: user.email, id: user.uid, isOnline: user.isOnline}))

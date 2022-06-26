@@ -5,7 +5,7 @@ const Img = require('../../images/avatar.jpg')
 
 const MessageItem = () => {
     let key = 1
-
+    
 
     const messages = [
         {text: 'Я левое сообщение', position: 'left'},
