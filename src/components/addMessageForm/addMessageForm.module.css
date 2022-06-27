@@ -6,7 +6,7 @@
     box-shadow: 0px 0px 25px 0px rgba(53,152,219,0.05);
     border-radius: 5px;
     padding: 10px 10px;
-
+    align-items: center;
     display: flex;
 
 }

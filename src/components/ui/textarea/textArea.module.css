@@ -15,3 +15,11 @@
     font-weight: 400;
     color: #8ea1b4;
 }
+
+.addtextarea::placeholder {
+    font-family: Lato;
+    font-size: 12px;
+    line-height: 1.2;
+    font-weight: 400;
+    color: #8ea1b4;
+}
