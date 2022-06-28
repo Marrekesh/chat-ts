@@ -8,16 +8,17 @@ import { db, auth, storage } from '../../firebase/firebase'
 import { useState } from 'react'
 import { setText } from '../../store/reducers/MessagesSlice'
 import { useAppDispatch } from '../../hooks/redux'
-
+import { setImgUrl } from '../../store/reducers/MessagesSlice'
+import { asyncCreateMessage } from '../../store/actionsCreator/asyncCreateMessage'
 
 const MessageWindow = () => {
 
     // const [text, setText] = useState('')
-    const [img, setImg] = useState<any>('')
+    // const [img, setImg] = useState<any>('')
     const chatUser = useAppSelector(state => state.chatUserSliceReducer.chatUser)
     const {text, messages} = useAppSelector(state => state.messageReducer)
     const dispatch = useAppDispatch()
-
+    const url = useAppSelector(state => state.messageReducer.img)
     const user1 = auth.currentUser?.uid
 
 
@@ -28,35 +29,36 @@ const MessageWindow = () => {
         
         const id = user1! > user2 ? `${user1 + user2}` : `${user2 + user1}`;
 
-        let url;
-        if (img) {
-            const imgRef = ref(storage, `images/${new Date().getTime()} - ${img.name}`)
-
-
-            const snap = await uploadBytes(imgRef, img)
-            const dlUrl = await getDownloadURL(ref(storage, snap.ref.fullPath))
-            url = dlUrl
-        }
-
-        await addDoc(collection(db, 'messages', id, 'chat'), {
-            text,
-            from: user1,
-            to: user2,
-            createdAd: Timestamp.fromDate(new Date()),
-            media: url || ''
-        })
-
-        await setDoc(doc(db, "lastMsg", id), {
-            text,
-            from: user1,
-            to: user2,
-            createdAt: Timestamp.fromDate(new Date()),
-            media: url || "",
-            unread: true,
-        });
-
+        await dispatch(asyncCreateMessage(text, user1, user2, url, id))
+        dispatch(setImgUrl(''))
         dispatch(setText(''))
-        setImg('')
+        // let url;
+        // if (img) {
+        //     const imgRef = ref(storage, `images/${new Date().getTime()} - ${img.name}`)
+        //     const snap = await uploadBytes(imgRef, img)
+        //     const dlUrl = await getDownloadURL(ref(storage, snap.ref.fullPath))
+        //     url = dlUrl
+        //     console.log(url)
+        // }
+
+        // await addDoc(collection(db, 'messages', id, 'chat'), {
+        //     text,
+        //     from: user1,
+        //     to: user2,
+        //     createdAd: Timestamp.fromDate(new Date()),
+        //     media: url || ''
+        // })
+
+        // await setDoc(doc(db, "lastMsg", id), {
+        //     text,
+        //     from: user1,
+        //     to: user2,
+        //     createdAt: Timestamp.fromDate(new Date()),
+        //     media: url || "",
+        //     unread: true,
+        // });
+        // dispatch(setText(''))
+        // dispatch(setImgUrl(''))
 	}
     
     const content = chatUser.name ? 
@@ -71,14 +73,16 @@ const MessageWindow = () => {
                             {messages.length ? messages.map((message,i) => <MessageItem key={i} user1={user1} message={message}/>) : null}
                     
                         </div>
-                        <AddMessageForm handleSubmit={handleSubmit} text={text} setImg={setImg}/>
+                        <AddMessageForm handleSubmit={handleSubmit}/>
                     </>
 
                     :
-
-                    <div className={c.infoBLock}>
-                        <h2>Select user</h2>
+                    <div className={c.messageItemWrapper}>
+                        <div className={c.infoBLock}>
+                            <h2>Select user</h2>
+                        </div>
                     </div>
+
 
 
 

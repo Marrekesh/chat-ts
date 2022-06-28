@@ -18,6 +18,10 @@ import { useAppSelector } from '../../hooks/redux'
 const AuthIdn: FC = () => {
     const {name, avatar} = useAppSelector(state => state.userReducer.user)
 
+    const onChangeHandler = (e: any) => {
+        console.log(e.target.value)
+    }
+
     return (
         <>       
             <div className={c.wrapper}>
@@ -28,10 +32,15 @@ const AuthIdn: FC = () => {
                         {/* <span className={c.name}>Dmytro</span>
                         <span className={c.name}>Romanovich</span> */}
                     </div>
-                    <div className={c.status}>
+                    {/* <div className={c.status}>
                         <div className={c.statusText}>Avaliable</div> 
                         <div className={c.statusArrow}>&lsaquo;</div>
-                    </div>
+                    </div> */}
+                    <select onChange={onChangeHandler}>
+                        <option value='Avaliable'>Avaliable</option>
+                        <option value='Offline'>Offline</option>
+                        <option value='AFK'>AFK</option>
+                    </select>
                 </div>
             </div>
         </>

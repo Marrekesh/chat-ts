@@ -20,6 +20,8 @@ export type TMessage = Array<IMessage>
 interface IStateMessage {
     text: Text,
     messages: TMessage,
+    img: string,
+    isLoadingImg: boolean,
     isLoading: boolean,
     error: string
 }
@@ -27,7 +29,9 @@ interface IStateMessage {
 const initialState: IStateMessage = {
     text: '',
     messages: [],
+    img: '',
     isLoading: false,
+    isLoadingImg: false,
     error: ''
 }
 
@@ -42,6 +46,9 @@ const messageSlice = createSlice({
         setMessages(state, action: PayloadAction<TMessage>) {
             state.messages = action.payload
         },
+        setImgUrl(state, action: PayloadAction<string>) {
+            state.img = action.payload
+        },
         setError(state, action: PayloadAction<string>) {
             state.error = action.payload
         },
@@ -51,6 +58,6 @@ const messageSlice = createSlice({
     }
 })
 
-export const {setText, setMessages, setError, setLoading} = messageSlice.actions;
+export const {setText, setMessages, setError, setLoading, setImgUrl} = messageSlice.actions;
 
 export default messageSlice.reducer

@@ -3,6 +3,7 @@ import c from './userListItem.module.css'
 import { IChatUser } from '../../store/reducers/ChatUserSlice'
 import { onSnapshot, doc } from "firebase/firestore";
 import { db } from '../../firebase/firebase'
+import { useAppSelector } from '../../hooks/redux'
 
 interface UsersItemProps {
     user: IChatUser,
@@ -13,7 +14,7 @@ interface UsersItemProps {
 const UserListItem: FC<UsersItemProps> = ({user, selectUser, user1}) => {
     
     const user2 = user?.uid
-
+    const chatUser = useAppSelector(state => state.chatUserSliceReducer.chatUser)
     const [data, setData] = useState<any>('')
 
     useEffect(() => {
@@ -26,16 +27,28 @@ const UserListItem: FC<UsersItemProps> = ({user, selectUser, user1}) => {
         return () => unsub();
       }, []);
 
-    const status = !user.isOnline ? <div className={c.status}>&bull;</div> : <div className={`${c.status} ${c.active}`}>&bull;</div>
+    const status = !user.isOnline ? <div className={c.status}>&bull;</div> : <div className={`${c.status} ${c.statusActive}`}>&bull;</div>
 
     return (
-        <div className={c.userListItem} onClick={() => selectUser(user)}>
+        <div className={`${c.userListItem} ${chatUser.name === user.name && c.active}`} onClick={() => selectUser(user)}>
             <div className={c.textBlock}>
                 <img className={c.image} src={user.avatar || require('../../images/img-not-found.jpg')} alt="photo" />
-                <div className={c.name}>{user.name}</div>
+                <div className={c.nameAndMessage}>
+                    <div className={c.name}>{user.name}
+                     {data?.from !== user1 && data?.unread && <small className={c.unread}>New</small>} 
+                    </div>
+                    
+                    {data && <div className={c.message}>
+                    <strong className={c.strong}>{data.from === user1 ? 'Me: ': user.name + ':' }</strong> {data.text}
+                    </div>}
+                    {/* <div className={c.message}>asd</div> */}
+                </div>
+
             </div>
+             
             {status}
         </div>
+       
     )
 }
 

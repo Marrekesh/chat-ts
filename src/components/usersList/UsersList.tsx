@@ -96,6 +96,7 @@ const UsersList: FC = () => {
 			dispatch(setMessages(msgs))
 		  });
 
+
 		// const user2 = user.uid;
 		// const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`;
 	
@@ -118,12 +119,10 @@ const UsersList: FC = () => {
 		// 	// setMsgs(msgs)
 		// })
 
-		// const docSnap: any = await getDoc(doc(db, "lastMsg", id));
-		// // if last message exists and message is from selected user
-		// if (docSnap.data() && docSnap.data().from !== user1) {
-		//   // update last message doc, set unread to false
-		//   await updateDoc(doc(db, "lastMsg", id), { unread: false });
-		// }
+		const docSnap: any = await getDoc(doc(db, "lastMsg", id));
+		if (docSnap.data() && docSnap.data().from !== user1) {
+		  await updateDoc(doc(db, "lastMsg", id), { unread: false });
+		}
 	// dispatch(removeChatUser())
 	}
 
