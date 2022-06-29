@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import c from './authidn.module.css'
 import MyButton from '../ui/button/MyButton'
 import btnClass from '../ui/button/myButton.module.css'
@@ -13,10 +13,12 @@ import { setMainUserLoading } from '../../store/reducers/MainUserSlice'
 import buttonClasses from '../ui/button/myButton.module.css'
 import { useNavigate } from 'react-router-dom'
 import { useAppSelector } from '../../hooks/redux'
-
+import Spinner from '../spinner/Spinner'
+import spinCss from '../spinner/spinner.module.css'
 
 const AuthIdn: FC = () => {
-    const {name, avatar} = useAppSelector(state => state.userReducer.user)
+    const {name} = useAppSelector(state => state.userReducer.user)
+    const {img, imgProfileLoading} = useAppSelector(state => state.profileReducer)
 
     const onChangeHandler = (e: any) => {
         console.log(e.target.value)
@@ -25,7 +27,12 @@ const AuthIdn: FC = () => {
     return (
         <>       
             <div className={c.wrapper}>
-                <img className={c.img} src={avatar || require('../../images/img-not-found.jpg')} alt="user" />
+                {imgProfileLoading 
+                ? 
+                <Spinner className={`${spinCss.spinner} ${spinCss.spinnerSmall} ${spinCss.white}`}/> 
+                : 
+                <img className={c.img} src={img || require('../../images/img-not-found.jpg')} alt="user" />
+                }
                 <div className={c.info}>
                     <div className="named">
                         <span className={c.name}>{name}</span>

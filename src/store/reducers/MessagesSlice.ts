@@ -12,14 +12,17 @@ export interface IMessage {
     from: string
     media: string
     text: string
-    to: string
+    to: string,
+    unread?: boolean
 }
 
 export type TMessage = Array<IMessage>
+export type LastMessage = Array<IMessage>
 
 interface IStateMessage {
     text: Text,
     messages: TMessage,
+    lastMessage: IMessage,
     img: string,
     isLoadingImg: boolean,
     isLoading: boolean,
@@ -29,6 +32,17 @@ interface IStateMessage {
 const initialState: IStateMessage = {
     text: '',
     messages: [],
+    lastMessage: {
+        createdAd: {
+            seconds: 0,
+            nanoseconds: 0
+        },
+        from: '',
+        to: '',
+        text: '',
+        media: '',
+        unread: false
+    },
     img: '',
     isLoading: false,
     isLoadingImg: false,
@@ -46,6 +60,15 @@ const messageSlice = createSlice({
         setMessages(state, action: PayloadAction<TMessage>) {
             state.messages = action.payload
         },
+        setLastMessage(state, action: PayloadAction<IMessage>) {
+            state.lastMessage.createdAd.seconds = action.payload.createdAd.seconds
+            state.lastMessage.createdAd.nanoseconds = action.payload.createdAd.nanoseconds
+            state.lastMessage.from = action.payload.from
+            state.lastMessage.to = action.payload.to
+            state.lastMessage.media = action.payload.media
+            state.lastMessage.text = action.payload.text
+            state.lastMessage.unread = action.payload.unread
+        },
         setImgUrl(state, action: PayloadAction<string>) {
             state.img = action.payload
         },
@@ -55,9 +78,12 @@ const messageSlice = createSlice({
         setLoading(state, action: PayloadAction<boolean>) {
             state.isLoading = action.payload
         },
+        setImgLoading(state, action: PayloadAction<boolean>) {
+            state.isLoadingImg = action.payload
+        },
     }
 })
 
-export const {setText, setMessages, setError, setLoading, setImgUrl} = messageSlice.actions;
+export const {setText, setMessages, setError, setLoading, setImgUrl, setImgLoading, setLastMessage} = messageSlice.actions;
 
 export default messageSlice.reducer

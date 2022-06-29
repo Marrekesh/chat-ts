@@ -6,6 +6,7 @@ import mainUserReduser from './reducers/MainUserSlice'
 import usersSliceReduser from './reducers/UsersListSlice'
 import chatUserSliceReducer from './reducers/ChatUserSlice'
 import messageReducer from './reducers/MessagesSlice'
+import profileReducer from './reducers/ProfileSlice'
 
 const rootReducer = combineReducers({
     userReducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
     mainUserReduser,
     usersSliceReduser,
     chatUserSliceReducer,
-    messageReducer
+    messageReducer,
+    profileReducer
 })
 
 export const setupStore = () => {

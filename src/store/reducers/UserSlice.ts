@@ -12,7 +12,8 @@ export interface IUser {
     email: string | null,
     id: string,
     isOnline: boolean,
-    avatar?: string
+    avatar?: string,
+    avatarPath?: string
 }
 
 interface IUSerState {

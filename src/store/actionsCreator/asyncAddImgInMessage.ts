@@ -6,7 +6,7 @@ import { db, auth, storage } from '../../firebase/firebase'
 import { useState } from 'react'
 import { setText } from '../../store/reducers/MessagesSlice'
 import { useAppDispatch } from '../../hooks/redux'
-import { setImgUrl } from "../../store/reducers/MessagesSlice"
+import { setImgUrl, setImgLoading } from "../../store/reducers/MessagesSlice"
 
 
 //Спросить как типизировать файли
@@ -14,6 +14,7 @@ export const asyncGetImgInMessageAction = (img: any) => async (dispatch: AppDisp
 
     try {
         // let url;
+        dispatch(setImgLoading(true))
         if (img) {
             const imgRef = ref(storage, `images/${new Date().getTime()} - ${img.name}`)
             const snap = await uploadBytes(imgRef, img)
@@ -24,5 +25,7 @@ export const asyncGetImgInMessageAction = (img: any) => async (dispatch: AppDisp
          
     } catch (error: any) {
         console.log(error.message)
-    } 
+    } finally {
+        dispatch(setImgLoading(false))
+    }
 }

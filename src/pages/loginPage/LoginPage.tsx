@@ -15,8 +15,8 @@ import { auth } from "../../firebase/firebase"
 import { setStatus } from "../../store/reducers/AuthSlice"
 import { useNavigate } from "react-router-dom";
 import buttonClasses from '../../components/ui/button/myButton.module.css'
-import { setLoading } from "../../store/reducers/AuthSlice"
-
+import { setLoading, setLoginState } from "../../store/reducers/AuthSlice"
+import spinClas from '../../components/spinner/spinner.module.css'
 
 import classes from './loginPage.module.css'
 import btn from '../../components/ui/button/myButton.module.css'
@@ -62,7 +62,7 @@ const LoginPage: FC = () => {
 	// }
 
 	const addTextHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-		dispatch(authSlice.actions.setLoginState({...state, [e.target.name]: e.target.value}))
+		dispatch(setLoginState({...state, [e.target.name]: e.target.value}))
 	}
 
 	const loginHendler = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -79,11 +79,13 @@ const LoginPage: FC = () => {
 		}
 	}
 
-	const spinnerOrButton = isLoading ? <Spinner/> : <MyButton 
-														className={btn.formButton}
-														onClick={loginHendler}
-														>Login
-													 </MyButton>
+	const spinnerOrButton = isLoading ? <Spinner className={spinClas.spinner}/> 
+											: 
+											<MyButton 
+												className={btn.formButton}
+												onClick={loginHendler}
+												>Login
+											</MyButton>
 
 	return  (
 		<>

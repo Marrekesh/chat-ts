@@ -9,6 +9,7 @@ import { onAuthStateChanged } from "firebase/auth"
 import { setMainUser, setMainUserError, setMainUserLoading } from "../reducers/MainUserSlice"
 import { setUser, setLoginUser } from "../reducers/UserSlice"
 import { useAuth } from "../../hooks/useAuth"
+import { setImgProfileUrl } from "../reducers/ProfileSlice"
 
 export const asyncGetMainUserAction = () => async (dispatch: AppDispatch) => {
     console.log('run')
@@ -23,6 +24,7 @@ export const asyncGetMainUserAction = () => async (dispatch: AppDispatch) => {
                         const data = docSnap.data()
                         // dispatch(setMainUserLoading(true)) 
                         dispatch(setUser({name: data.name, surname: data.surname, email: data.email, id: data.uid, isOnline: data.isOnline, avatar: data.avatar }))
+                        dispatch(setImgProfileUrl(data.avatar))
                         // dispatch(setMainUserLoading(false))
                         if (data.isOnline === true) {
                             dispatch(setLoginUser({email: user.email, id: user.uid}))
