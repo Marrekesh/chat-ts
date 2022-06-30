@@ -1,25 +1,33 @@
 .addtextarea {
+    display: flex;
+    align-items: center;
     width: 100%;
     height: 100%;
     background: transparent;
+    background-color: #d5dfe6;
     resize: none;
-    outline: none;
+    /* outline: 1px solid grey; */
     border: none;
-    padding: 10px 20px 0ps 20px;
-    vertical-align: middle;
-    padding-top: 15px;
-
+    padding: 20px;
+    padding-top: 30px;
+    border-radius: 10px;
+    margin-right: 10px;
+    /* overflow: hidden; */
+    /* vertical-align: middle; */
+    
     font-family: Lato;
-    font-size: 12px;
-    line-height: 1.2;
+    font-size: 16px;
+    line-height: 10px;
     font-weight: 400;
-    color: #8ea1b4;
+    letter-spacing: 0.06em;
+    color: #6d818f;
 }
 
 .addtextarea::placeholder {
     font-family: Lato;
-    font-size: 12px;
-    line-height: 1.2;
+    font-size: 14px;
+    line-height: 10px;
     font-weight: 400;
-    color: #8ea1b4;
+    letter-spacing: 0.06em;
+    color: #6d818f;
 }

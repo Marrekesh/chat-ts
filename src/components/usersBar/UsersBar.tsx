@@ -7,10 +7,10 @@ const UsersBar = () => {
   return (
     <div className={c.usersBar}>
         <div className={c.headerUserBar}>
-            <h3 className={c.headerUserBarTitle}>Chat</h3>
-            <MyButton className={btnClassses.btn}>NEW</MyButton>
+            <h3 className={c.headerUserBarTitle}>Online friends</h3>
+            {/* <MyButton className={btnClassses.btn}>NEW</MyButton> */}
         </div>
-        <hr className={c.barLine}/>
+        {/* <hr className={c.barLine}/> */}
         <UsersList/>
     </div>
   )

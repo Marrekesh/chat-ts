@@ -6,6 +6,7 @@ import {BrowserRouter as Router} from "react-router-dom";
 
 import WrapperComponent from '../wrapperComponent/WrapperComponent';
 import './App.css';
+
 import 'typeface-lato'
 function App() {
 

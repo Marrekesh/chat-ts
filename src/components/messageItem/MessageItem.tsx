@@ -4,15 +4,20 @@ import { IMessage } from '../../store/reducers/MessagesSlice'
 
 
 import Moment from 'react-moment'
+import { useAppSelector } from '../../hooks/redux'
 
 const Img = require('../../images/img-not-found.jpg')
 
 interface MessageItemProps {
     message: IMessage,
-    user1: string | undefined
+    user1: string | undefined,
+    user2: string
 }
 
-const MessageItem: FC<MessageItemProps> = ({message, user1}) => {
+const MessageItem: FC<MessageItemProps> = ({message, user1, user2}) => {
+    
+    // const chatUser = useAppSelector(state => state.chatUserSliceReducer.chatUser.avatar)
+    
     const scrollRef: any = useRef()
 
     useEffect(() => {
@@ -20,13 +25,15 @@ const MessageItem: FC<MessageItemProps> = ({message, user1}) => {
     }, [message])
 
 
-    const img = message.media ? <img className={c.img} src={message.media} alt="avka" /> : null
+    const img = message.media ? <img className={c.img} src={message.media} alt="img" /> : null
     const text = message.text
 
-    const userClassesConten = message.from === user1 ? 
+    const userClassesConten = message.from === user1 ?
+    
+    
                                                     <div ref={scrollRef} className={` ${c.wrapperS} ${ c.wrapperSRight}`}>
                                                         <div className={`${c.messageItem} ${c.messageItemRight}`}>
-                                                            <div className={`${c.textMessage} ${c.textMessageLeft}`}>
+                                                            <div className={`${c.textMessage} ${c.textMessageRight}`}>
                                                             {/* <div className={c.triangleRight}></div> */}
                                                             {img}
                                                             {text}
@@ -38,6 +45,7 @@ const MessageItem: FC<MessageItemProps> = ({message, user1}) => {
                                                     <div ref={scrollRef} className={c.wrapperS}>
                                                         <div className={c.messageItem}>
                                                             {/* {img} */}
+                                                            {/* <img className={c.avatar} src={chatUser} alt="avka" /> */}
                                                             <div className={c.textMessage}>
                                                                 {/* <div className={c.triangle}></div> */}
                                                                 {img}

@@ -10,7 +10,7 @@ body {
 	font-family: typeface-lato;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	background-color: rgb(233, 247, 247);
+	background-color: #f1f5f8;
 }
   
 .App {

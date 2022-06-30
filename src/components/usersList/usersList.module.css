@@ -1,5 +1,6 @@
 .userList {
+    width: 401px;
     display: flex;
     flex-direction: column;
-    padding-top: 15px;
+    /* padding-top: 15px; */
 }

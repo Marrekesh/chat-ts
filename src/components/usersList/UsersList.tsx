@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useState, useCallback } from 'react'
 import { db, auth } from '../../firebase/firebase'
 import { collectionGroup, query, where, onSnapshot, collection, addDoc ,getDoc, updateDoc,doc, orderBy } from 'firebase/firestore'
 import { useAppSelector, useAppDispatch } from '../../hooks/redux'
@@ -53,6 +53,31 @@ const UsersList: FC = () => {
 		return () => unsub()
 	},[])
 
+	// useEffect(() => {
+	// 	const user2 = chatUser.uid
+	// 	const id = user1! > user2 ? `${user1 + user2}` : `${user2 + user1}`;
+	// 	const msgsRef = collection(db, "messages", id, "chat");
+	// 	const q = query(msgsRef, orderBy("createdAd", "asc"));
+	// 	onSnapshot(q, (querySnapshot) => {
+	// 	let msgs: TMessage = [];
+	// 	querySnapshot.forEach((doc) => {
+	// 		const item = doc.data()
+	// 		// console.log(item)
+	// 		  msgs.push({
+	// 			createdAd: {
+	// 				seconds: item.createdAd.seconds,
+	// 				nanoseconds: item.createdAd.nanoseconds
+	// 			}, 
+	// 			from: item.from,
+	// 			media: item.media,
+	// 			text: item.text,
+	// 			to: item.to
+	// 		});
+	// 	});
+	// 	dispatch(setMessages(msgs))
+	//   });
+	// }, [])
+
 	const selectUser = async (user: IChatUser) => {
 		dispatch(setChatUser({
 			avatar: user.avatar,
@@ -69,33 +94,44 @@ const UsersList: FC = () => {
 
 		const user2 = user.uid
 		const id = user1! > user2 ? `${user1 + user2}` : `${user2 + user1}`;
-
 		// const msgRef = collection(db, 'messages', id, 'chat')
 		// const q = query(msgRef, orderBy('createdAt', 'asc'))
 
-		const msgsRef = collection(db, "messages", id, "chat");
+
+		const msgsRef =  collection(db, "messages", id, "chat");
 		const q = query(msgsRef, orderBy("createdAd", "asc"));
 
-
+	
 		onSnapshot(q, (querySnapshot) => {
-			let msgs: TMessage = [];
-			querySnapshot.forEach((doc) => {
-				const item = doc.data()
-				// console.log(item)
-			  	msgs.push({
-					createdAd: {
-						seconds: item.createdAd.seconds,
-						nanoseconds: item.createdAd.nanoseconds
-					}, 
-					from: item.from,
-					media: item.media,
-					text: item.text,
-					to: item.to
-				});
+		let msgs: TMessage = [];
+		querySnapshot.forEach((doc) => {
+			const item = doc.data()
+			// console.log(item)
+			msgs.push({
+				createdAd: {
+					seconds: item.createdAd.seconds,
+					nanoseconds: item.createdAd.nanoseconds
+				}, 
+				from: item.from,
+				media: item.media,
+				text: item.text,
+				to: item.to
 			});
+		});
+		if((msgs[0].to === user1 && msgs[0].from === chatUser.uid) || (msgs[0].to === chatUser.uid && msgs[0].from === user1)) {
+			console.log(`${msgs[0].to} to ${user1}`)
+			console.log(`${msgs[0].from} from ${chatUser.uid}`)
+			console.log(`${msgs[0].to} to ${chatUser.uid}`)
+			console.log(`${msgs[0].from} from ${user1}`)
 			dispatch(setMessages(msgs))
-		  });
+		}	
+		});
+			
+	
 
+		
+
+		  
 
 		// const user2 = user.uid;
 		// const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`;

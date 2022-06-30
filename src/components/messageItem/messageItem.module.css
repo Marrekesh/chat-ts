@@ -10,9 +10,17 @@
 
 .messageItem {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     margin-bottom: 20px;
 
+}
+
+.avatar {
+    width: 54px;
+    height: 54px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 10px;
 }
 
 .img {
@@ -27,28 +35,33 @@
     position: relative;
     /* display: flex;
     align-items: center; */
-    padding: 15px 15px;
+    word-wrap: break-word;
+    padding: 25px;
 
-    max-width: 352px;
-    background-color: #d6e3ec;
-    border-radius: 19.5px;
+    max-width: 418px;
+    background-color: #3598db;
+    border-radius: 10px;
 
     font-family: Lato;
-    font-size: 12px;
-    line-height: 1.2;
+    font-size: 16px;
+    line-height: 23px;
     font-weight: 400;
-    color: #8ea1b4;
+    letter-spacing: 0.06em;
+    color: #ffffff;
 }
 
 /* left */
 
 
 
-.textMessage.textMessageLeft {
+.textMessage.textMessageRight {
     margin-right: 20px;
-    background-color: #3598db;
-
-    color: #fefefe;
+    background-color: #f1f5f8;
+    font-size: 16px;
+    line-height: 23px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: #444444;
 }
 
 .img.imgLeft {

@@ -20,7 +20,7 @@ const MessageWindow = () => {
     const dispatch = useAppDispatch()
     const url = useAppSelector(state => state.messageReducer.img)
     const user1 = auth.currentUser?.uid
-
+    const user2 = chatUser.uid
 
     async function handleSubmit(e: any) {
 		e.preventDefault()
@@ -61,7 +61,7 @@ const MessageWindow = () => {
         // dispatch(setImgUrl(''))
 	}
     
-    const content = chatUser.name ? 
+    const content = chatUser.name  ? 
                     <>
                         <div className={c.messageHeader}>
                             <img className={c.img} src={chatUser.avatar} alt="avatar" />
@@ -70,7 +70,7 @@ const MessageWindow = () => {
                             </div>
                         </div>
                         <div className={c.messageItemWrapper}>
-                            {messages.length ? messages.map((message,i) => <MessageItem key={i} user1={user1} message={message}/>) : null}
+                            {messages.length ? messages.map((message, i) => <MessageItem key={i} user1={user1} user2={user2} message={message}/>) : null}
                     
                         </div>
                         <AddMessageForm handleSubmit={handleSubmit}/>
@@ -86,7 +86,7 @@ const MessageWindow = () => {
 
 
 
-           
+           //&& (messages[0]?.from === user1 && messages[0]?.to === user2) || (messages[0]?.from === user2 && messages[0]?.from === user1)
 
     return (
         <div className={c.messageWindow}>

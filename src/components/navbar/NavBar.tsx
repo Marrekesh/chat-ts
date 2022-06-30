@@ -8,7 +8,11 @@ import Burger from '../burger/Burger'
 import AuthIdn from '../authIdn/AuthIdn'
 import { FC } from 'react'
 import NavigationMenu from '../navigationMenu/NavigationMenu'
-
+import { useAppDispatch } from '../../hooks/redux'
+import { removeUser, removeLoginUser } from '../../store/reducers/UserSlice'
+import { signOut } from "firebase/auth"
+import { auth, db } from '../../firebase/firebase'
+import { updateDoc, doc } from 'firebase/firestore'
 // import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
 // import { MenuProps, Row } from 'antd';
 // import { Breadcrumb, Layout, Menu } from 'antd';
@@ -21,50 +25,34 @@ const NavBar: FC = () => {
     const navClasses = isAuth ? `${c.nav}` :`${c.nav} ${c.navEnd}`
     const {pathname} = useLocation()
 
-    // interface IbuttonsMenu {
-    //     link: string, 
-    //     label: string,
-    // }
+    interface IbuttonsMenu {
+        link: string, 
+        label: string,
+    }
 
-    // const buttonsList1: IbuttonsMenu = [
-    //     {link: '/login', label: 'Login'},
-    //     {link: '/registration', label: 'Sign Up'}
-    // ]
+    type ButtonsList = Array<IbuttonsMenu> 
 
-   
+    const buttonsList: ButtonsList = [
+        {link: '/profile', label: 'Profile'},
+        {link: '/main', label: 'Message'},
+    ]
 
-    // const itemB =   <Link to=''>
-    //                 <MyButton className={buttonClasses.btn}>Кнопка</MyButton>
-    //          </Link>
+    const dispatch = useAppDispatch()
 
-    // const arr = [itemB]
+    const logoutHandler = async () => {
+        await updateDoc(doc(db, 'users', auth.currentUser!.uid), {
+            isOnline: false
+        })
+        await signOut(auth)
+        dispatch(removeUser())
+        dispatch(removeLoginUser())
+        // navigate('/login')
+        // dispatch(setStatus(false))
+        // localStorage.removeItem('userData')
 
-    // const items1 = arr.map((item) => item)                      
-    
-    // const items1:MenuProps['items']  = ['Logout'].map(key => ({
-    //     key,
-    //     label: key,
-    // }));
-    
-    // const items2:MenuProps['items'] = ['Login', 'SignUp'].map(key => ({
-    //     key,
-    //     label: key,
-    // }));
+        // dispatch(setMainUserLoading(false))
+    }
 
-    // const btn = isAuth ? items2 : items1
-    
-    // return (
-    //     <Layout>
-    //         <Header className="header">
-    //         {/* <div className="logo" /> */}
-    //         <Row justify='end'>
-    //             <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']} items={btn}/>
-    //                 {/* <Menu.Item></Menu.Item> */}
-    //         </Row>
-            
-    //         </Header>
-    //   </Layout>
-    // )
 
     if (!isAuth && pathname === '/registration') {
         return (
@@ -79,11 +67,28 @@ const NavBar: FC = () => {
     } else if(isAuth) {
         return (
             <div className={c.navbar}>
+                <div className={c.logoSearchBLock}>
+                    <div className={c.logo}>Chat</div>
+                    <div className={c.search}>Search</div>
+                </div>
                 <nav className={navClasses}>
-                    {/* <Burger/> */}
-                    <AuthIdn/>
+                    <div className={c.btnGroup}>
+                        {buttonsList.map(item => {
+                            return (
+                                <Link to={item.link}>
+                                    <MyButton className={`${buttonClasses.btn} ${buttonClasses.navBtn}`}>{item.label}</MyButton>
+                                </Link>
+                            )
+                        })}
+                        <Link onClick={logoutHandler} to='/login'>
+                            <MyButton className={`${buttonClasses.btn} ${buttonClasses.navBtn}`}>Logout</MyButton>
+                        </Link>
+                        
+                    </div>
+                   <AuthIdn/>
                 </nav> 
-                <NavigationMenu/>
+                
+                {/* <NavigationMenu/> */}
             </div>
         )
     } else {

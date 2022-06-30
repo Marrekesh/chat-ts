@@ -34,7 +34,7 @@ const AuthIdn: FC = () => {
                 <img className={c.img} src={img || require('../../images/img-not-found.jpg')} alt="user" />
                 }
                 <div className={c.info}>
-                    <div className="named">
+                    <div className={c.named}>
                         <span className={c.name}>{name}</span>
                         {/* <span className={c.name}>Dmytro</span>
                         <span className={c.name}>Romanovich</span> */}
@@ -43,7 +43,7 @@ const AuthIdn: FC = () => {
                         <div className={c.statusText}>Avaliable</div> 
                         <div className={c.statusArrow}>&lsaquo;</div>
                     </div> */}
-                    <select onChange={onChangeHandler}>
+                    <select className={c.select} onChange={onChangeHandler}>
                         <option value='Avaliable'>Avaliable</option>
                         <option value='Offline'>Offline</option>
                         <option value='AFK'>AFK</option>
