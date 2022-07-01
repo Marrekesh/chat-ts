@@ -68,6 +68,7 @@ const messageSlice = createSlice({
             state.lastMessage.media = action.payload.media
             state.lastMessage.text = action.payload.text
             state.lastMessage.unread = action.payload.unread
+           
         },
         setImgUrl(state, action: PayloadAction<string>) {
             state.img = action.payload

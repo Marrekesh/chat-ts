@@ -11,15 +11,17 @@ import { setLastMessage, LastMessage } from '../../store/reducers/MessagesSlice'
 
 interface UsersItemProps {
     user: IChatUser,
-    user1: any
+    user1: any,
     selectUser: (user: IChatUser) => void
 }
 
 const UserListItem: FC<UsersItemProps> = ({user, selectUser, user1}) => {
     const dispatch = useAppDispatch()
     const user2 = user?.uid
+
     const chatUser = useAppSelector(state => state.chatUserSliceReducer.chatUser)
     
+    // console.log(chatUser)
     // const data = useAppSelector(state => state.messageReducer.lastMessage)
     // console.log(typeof data)
     // useEffect(() => {

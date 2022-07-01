@@ -61,6 +61,7 @@ const MessageWindow = () => {
         // dispatch(setImgUrl(''))
 	}
     
+    console.log(chatUser)
     const content = chatUser.name  ? 
                     <>
                         <div className={c.messageHeader}>
@@ -70,8 +71,7 @@ const MessageWindow = () => {
                             </div>
                         </div>
                         <div className={c.messageItemWrapper}>
-                            {messages.length ? messages.map((message, i) => <MessageItem key={i} user1={user1} user2={user2} message={message}/>) : null}
-                    
+                            {messages.map((message, i) => <MessageItem key={i} user1={user1} user2={user2} message={message}/>)}
                         </div>
                         <AddMessageForm handleSubmit={handleSubmit}/>
                     </>

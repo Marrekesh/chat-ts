@@ -8,7 +8,8 @@ import { IChatUser } from '../../store/reducers/ChatUserSlice'
 import { setChatUser, removeChatUser } from '../../store/reducers/ChatUserSlice'
 import { setMessages } from '../../store/reducers/MessagesSlice'
 import { TMessage } from '../../store/reducers/MessagesSlice'
-
+import { gumno } from '../../store/actionsCreator/gumno'
+import { GumnoMessage } from '../../store/actionsCreator/GumnoMessage'
 import UserListItem from '../userListItem/UserListItem'
 
 import c from './usersList.module.css'
@@ -19,10 +20,15 @@ const UsersList: FC = () => {
 	const messages = useAppSelector(state => state.messageReducer.messages)
 	const chatUser = useAppSelector(state => state.chatUserSliceReducer.chatUser)
 	const user1 = auth.currentUser?.uid
+	//
 
-	// const [msgs, setMsgs] = useState([])
+	// const user2 = chatUser.uid
+	// const id = user1! > user2 ? `${user1 + user2}` : `${user2 + user1}`;
 
-	// const [users, setUsers] = useState([])
+
+	// const msgsRef =  collection(db, "messages", id, "chat");
+	// const q = query(msgsRef, orderBy("createdAd", "asc"));
+	//
 	useEffect(() => {
 		const usersRef = collection(db, 'users')
 		//create query object
@@ -53,30 +59,43 @@ const UsersList: FC = () => {
 		return () => unsub()
 	},[])
 
-	// useEffect(() => {
-	// 	const user2 = chatUser.uid
-	// 	const id = user1! > user2 ? `${user1 + user2}` : `${user2 + user1}`;
-	// 	const msgsRef = collection(db, "messages", id, "chat");
-	// 	const q = query(msgsRef, orderBy("createdAd", "asc"));
-	// 	onSnapshot(q, (querySnapshot) => {
-	// 	let msgs: TMessage = [];
-	// 	querySnapshot.forEach((doc) => {
-	// 		const item = doc.data()
-	// 		// console.log(item)
-	// 		  msgs.push({
-	// 			createdAd: {
-	// 				seconds: item.createdAd.seconds,
-	// 				nanoseconds: item.createdAd.nanoseconds
-	// 			}, 
-	// 			from: item.from,
-	// 			media: item.media,
-	// 			text: item.text,
-	// 			to: item.to
-	// 		});
-	// 	});
-	// 	dispatch(setMessages(msgs))
-	//   });
-	// }, [])
+
+	useEffect(() => {
+
+		const user2 = chatUser.uid
+		const id = user1! > user2 ? `${user1 + user2}` : `${user2 + user1}`;
+	
+	
+		const msgsRef =  collection(db, "messages", id, "chat");
+		const q = query(msgsRef, orderBy("createdAd", "asc"));
+
+		// dispatch(GumnoMessage(q, id, user1))
+
+		const unsub = onSnapshot(q, (querySnapshot) => {
+		
+			let msgs: TMessage = [];
+			querySnapshot.forEach((doc) => {
+				const item = doc.data()
+				// console.log(item)
+				msgs.push({
+					createdAd: {
+						seconds: item.createdAd.seconds,
+						nanoseconds: item.createdAd.nanoseconds
+					}, 
+					from: item.from,
+					media: item.media,
+					text: item.text,
+					to: item.to
+				});
+			});
+	
+			dispatch(setMessages(msgs))
+		});
+
+		return () => unsub()
+
+	}, [chatUser])
+
 
 	const selectUser = async (user: IChatUser) => {
 		dispatch(setChatUser({
@@ -92,73 +111,49 @@ const UsersList: FC = () => {
 			uid: user.uid
 		}))
 
-		const user2 = user.uid
+		// await dispatch(gumno(user))
+		// console.log(chatUser)
+
+
+		const user2 = chatUser.uid
 		const id = user1! > user2 ? `${user1 + user2}` : `${user2 + user1}`;
-		// const msgRef = collection(db, 'messages', id, 'chat')
-		// const q = query(msgRef, orderBy('createdAt', 'asc'))
 
 
 		const msgsRef =  collection(db, "messages", id, "chat");
 		const q = query(msgsRef, orderBy("createdAd", "asc"));
-
-	
-		onSnapshot(q, (querySnapshot) => {
-		let msgs: TMessage = [];
-		querySnapshot.forEach((doc) => {
-			const item = doc.data()
-			// console.log(item)
-			msgs.push({
-				createdAd: {
-					seconds: item.createdAd.seconds,
-					nanoseconds: item.createdAd.nanoseconds
-				}, 
-				from: item.from,
-				media: item.media,
-				text: item.text,
-				to: item.to
-			});
-		});
-		if((msgs[0].to === user1 && msgs[0].from === chatUser.uid) || (msgs[0].to === chatUser.uid && msgs[0].from === user1)) {
-			console.log(`${msgs[0].to} to ${user1}`)
-			console.log(`${msgs[0].from} from ${chatUser.uid}`)
-			console.log(`${msgs[0].to} to ${chatUser.uid}`)
-			console.log(`${msgs[0].from} from ${user1}`)
-			dispatch(setMessages(msgs))
-		}	
-		});
-			
-	
-
 		
 
-		  
-
-		// const user2 = user.uid;
-		// const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`;
-	
-		// const msgsRef = collection(db, "messages", id, "chat");
-		// const q = query(msgsRe7f, orderBy("createdAt", "asc"));
 
 
-
-		// onSnapshot(q, (querySnapshot) => {
-		// 	let msgs: any = []
-		// 	querySnapshot.forEach((doc) => {
+		// // await(dispatch(GumnoMessage(q)))
+		// 	onSnapshot(q, (querySnapshot) => {
 				
-		// 		msgs.push(doc.data())
-		// 		console.log(doc.data())
-		// 	})
-		// 	// setMsgs(msgs)
-		// 	console.log(msgs)
-		// 	dispatch(setMessages(msgs))
-		// 	// console.log(messages)
-		// 	// setMsgs(msgs)
-		// })
+		// 		let msgs: TMessage = [];
+		// 		querySnapshot.forEach((doc) => {
+		// 			const item = doc.data()
+		// 			// console.log(item)
+		// 			msgs.push({
+		// 				createdAd: {
+		// 					seconds: item.createdAd.seconds,
+		// 					nanoseconds: item.createdAd.nanoseconds
+		// 				}, 
+		// 				from: item.from,
+		// 				media: item.media,
+		// 				text: item.text,
+		// 				to: item.to
+		// 			});
+		// 		});
+			
+		// 		dispatch(setMessages(msgs))
+		// 	});
+	
 
 		const docSnap: any = await getDoc(doc(db, "lastMsg", id));
 		if (docSnap.data() && docSnap.data().from !== user1) {
 		  await updateDoc(doc(db, "lastMsg", id), { unread: false });
 		}
+
+
 	// dispatch(removeChatUser())
 	}
 

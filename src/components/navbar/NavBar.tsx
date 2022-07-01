@@ -75,7 +75,7 @@ const NavBar: FC = () => {
                     <div className={c.btnGroup}>
                         {buttonsList.map(item => {
                             return (
-                                <Link to={item.link}>
+                                <Link key={item.link} to={item.link}>
                                     <MyButton className={`${buttonClasses.btn} ${buttonClasses.navBtn}`}>{item.label}</MyButton>
                                 </Link>
                             )
