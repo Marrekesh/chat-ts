@@ -20,7 +20,7 @@ export const asyncRegistrAction = (name: AuthUserDataString, surname: AuthUserDa
             email,
             surname,
             createdAt: Timestamp.fromDate(new Date()),
-            isOnline: false,
+            isOnline: 'offline',
         })
         dispatch(removeRegisterState())
         // dispatch(setStatus(true))

@@ -12,7 +12,6 @@ import { useAuth } from "../../hooks/useAuth"
 import { setImgProfileUrl } from "../reducers/ProfileSlice"
 
 export const asyncGetMainUserAction = () => async (dispatch: AppDispatch) => {
-    console.log('run')
     try {
         // 
         onAuthStateChanged(auth, async (user) => {
@@ -26,7 +25,7 @@ export const asyncGetMainUserAction = () => async (dispatch: AppDispatch) => {
                         dispatch(setUser({name: data.name, surname: data.surname, email: data.email, id: data.uid, isOnline: data.isOnline, avatar: data.avatar }))
                         dispatch(setImgProfileUrl(data.avatar))
                         // dispatch(setMainUserLoading(false))
-                        if (data.isOnline === true) {
+                        if (data.isOnline === 'Online') {
                             dispatch(setLoginUser({email: user.email, id: user.uid}))
                         }
                         

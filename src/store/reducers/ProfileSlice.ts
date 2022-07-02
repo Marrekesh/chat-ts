@@ -9,7 +9,7 @@ export interface IProfileUser {
         nanoseconds: number
     }
     email: string
-    isOnline: boolean
+    isOnline: string
     name: string
     surname: string
     uid: string
@@ -26,7 +26,7 @@ interface IProfileState {
 
 
 const initialState: IProfileState = {
-    user: {name: '', surname: '', email: '', uid: '', isOnline: false, avatar: '', avatarPath: '', createdAt: {seconds: 0, nanoseconds: 0}},
+    user: {name: '', surname: '', email: '', uid: '', isOnline: 'Offline', avatar: '', avatarPath: '', createdAt: {seconds: 0, nanoseconds: 0}},
     img: '',
     imgProfileLoading: false,
     isLoading: false,

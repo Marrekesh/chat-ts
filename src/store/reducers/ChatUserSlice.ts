@@ -11,7 +11,7 @@ export interface IChatUser {
     avatar?: string,
     createdAt: Icreated,
     email: string,
-    isOnline: boolean,
+    isOnline: string,
     name: string,
     surname: string,
     uid: string
@@ -32,7 +32,7 @@ const initialState: IchatUserState = {
             nanoseconds: 0
         },
         email: '',
-        isOnline: false,
+        isOnline: 'Offline',
         name: '',
         surname: '',
         uid: ''
@@ -65,7 +65,7 @@ export const chatUserSlice = createSlice({
             state.chatUser.createdAt.nanoseconds = 0
             state.chatUser.createdAt.seconds = 0
             state.chatUser.uid = ''
-            state.chatUser.isOnline = false
+            state.chatUser.isOnline = 'Offline'
             state.chatUser.avatar = ''
         },
         setError(state, action: PayloadAction<AuthUserDataString>) {

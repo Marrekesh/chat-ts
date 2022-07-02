@@ -55,7 +55,10 @@ const UserListItem: FC<UsersItemProps> = ({user, selectUser, user1}) => {
       return () => unsub();
     }, []);
 
-    const status = !user.isOnline ? <div className={c.status}>&bull;</div> : <div className={`${c.status} ${c.statusActive}`}>&bull;</div>
+    // const status = !user.isOnline ? <div className={c.status}>&bull;</div> : <div className={`${c.status} ${c.statusActive}`}>&bull;</div>
+
+    const status =  <div className={`${c.status} ${c[user.isOnline]}`}>&bull;</div> 
+
 
     return (
         <div className={`${c.userListItem} ${chatUser.name === user.name && c.active}`} onClick={() => selectUser(user)}>

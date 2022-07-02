@@ -12,7 +12,7 @@
     align-items: center;
     padding: 30px;
     height: 101px;
-    border-bottom: 1px solid rgba(0,0,0, .1);
+    /* border-bottom: 1px solid rgba(0,0,0, .1); */
     /* padding: 40px 30px 40px 40px; */
     
 }
@@ -42,7 +42,10 @@
     /* position: relative; */
     height: calc(100vh - 331px);
     background-color: #fff;
-    border-radius: 5px;
+    /* border-radius: 5px; */
+    border-top: 1px solid rgba(0,0,0, .1);
+    border-bottom: 1px solid rgba(0,0,0, 0.1);
+
     /* border: 1px solid blue; */
     padding: 30px;
     overflow-y: scroll;

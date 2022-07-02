@@ -64,9 +64,31 @@ const NavBar: FC = () => {
                 </nav> 
             </div>
         )
-    } else if(isAuth) {
+    } else if (isAuth && pathname === '/profile') {
         return (
             <div className={c.navbar}>
+                <nav className={navClasses}>
+                    <div className={c.btnGroup}>
+                        {buttonsList.map(item => {
+                            return (
+                                <Link key={item.link} to={item.link}>
+                                    <MyButton className={`${buttonClasses.btn} ${buttonClasses.navBtn}`}>{item.label}</MyButton>
+                                </Link>
+                            )
+                        })}
+                        <Link onClick={logoutHandler} to='/login'>
+                            <MyButton className={`${buttonClasses.btn} ${buttonClasses.navBtn}`}>Logout</MyButton>
+                        </Link>  
+                    </div>
+                   <AuthIdn/>
+                </nav> 
+                
+                {/* <NavigationMenu/> */}
+            </div>
+        )
+    } else if(isAuth) {
+        return (
+                <div className={` ${c.navbar} ${c.navBtw}`}>
                 <div className={c.logoSearchBLock}>
                     <div className={c.logo}>Chat</div>
                     <div className={c.search}>Search</div>
@@ -82,10 +104,9 @@ const NavBar: FC = () => {
                         })}
                         <Link onClick={logoutHandler} to='/login'>
                             <MyButton className={`${buttonClasses.btn} ${buttonClasses.navBtn}`}>Logout</MyButton>
-                        </Link>
-                        
+                        </Link>  
                     </div>
-                   <AuthIdn/>
+                <AuthIdn/>
                 </nav> 
                 
                 {/* <NavigationMenu/> */}
@@ -96,12 +117,13 @@ const NavBar: FC = () => {
             <div className={c.navbar}>
                 <nav className={navClasses}>
                     <Link to="/registration">
-                            <MyButton className={buttonClasses.btn}>Sign Up</MyButton>
+                        <MyButton className={buttonClasses.btn}>Sign Up</MyButton>
                     </Link>
                 </nav> 
             </div>
         )
     }
+     
 
     //     <Link to="/registration">
     //     <MyButton className={buttonClasses.btn}>Sign Up</MyButton>

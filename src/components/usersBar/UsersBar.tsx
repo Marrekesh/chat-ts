@@ -7,7 +7,7 @@ const UsersBar = () => {
   return (
     <div className={c.usersBar}>
         <div className={c.headerUserBar}>
-            <h3 className={c.headerUserBarTitle}>Online friends</h3>
+            <h3 className={c.headerUserBarTitle}>Users</h3>
             {/* <MyButton className={btnClassses.btn}>NEW</MyButton> */}
         </div>
         {/* <hr className={c.barLine}/> */}

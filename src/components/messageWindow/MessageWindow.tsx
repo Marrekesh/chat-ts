@@ -61,7 +61,6 @@ const MessageWindow = () => {
         // dispatch(setImgUrl(''))
 	}
     
-    console.log(chatUser)
     const content = chatUser.name  ? 
                     <>
                         <div className={c.messageHeader}>

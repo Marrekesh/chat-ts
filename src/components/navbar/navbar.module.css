@@ -2,7 +2,7 @@
 .navbar {
     position: fixed;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     top: 0;
     left: 0;
     
@@ -12,6 +12,10 @@
 
     background-color: #509ee2;
     /* box-shadow: 0px 5px 30px 0px rgba(52,152,219,0.4); */
+}
+
+.navBtw {
+    justify-content: space-between;
 }
 
 .logoSearchBLock {

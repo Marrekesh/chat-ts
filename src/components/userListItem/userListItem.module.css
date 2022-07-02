@@ -60,9 +60,17 @@
     color: red;
 }
 
-.status.statusActive {
+.status.Offline {
+    color: red;;
+}
+
+.status.Online {
     color: #51dacf;
 }
+.status.Sleep {
+    color: #ecc513;
+}
+
 
 .textblockMessge {
     display: flex;

@@ -119,8 +119,8 @@ const UsersList: FC = () => {
 		const id = user1! > user2 ? `${user1 + user2}` : `${user2 + user1}`;
 
 
-		const msgsRef =  collection(db, "messages", id, "chat");
-		const q = query(msgsRef, orderBy("createdAd", "asc"));
+		// const msgsRef =  collection(db, "messages", id, "chat");
+		// const q = query(msgsRef, orderBy("createdAd", "asc"));
 		
 
 

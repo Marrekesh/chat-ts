@@ -14,7 +14,7 @@ export const asyncLoginAction = (email: AuthUserDataString, password: AuthUserDa
 		dispatch(setLoading(true))
         const response = await signInWithEmailAndPassword(auth, email, password)
         await updateDoc(doc(db, 'users', response.user.uid), {
-            isOnline: true
+            isOnline: 'Online'
         })
         await getDoc(doc(db, 'users', auth.currentUser!.uid)).then((docSnap) => {
             if(docSnap.exists()) {

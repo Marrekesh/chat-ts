@@ -11,7 +11,7 @@ export interface IUser {
     surname: string,
     email: string | null,
     id: string,
-    isOnline: boolean,
+    isOnline: string,
     avatar?: string,
     avatarPath?: string
 }
@@ -24,7 +24,7 @@ interface IUSerState {
 }
 
 const initialState: IUSerState = {
-    user: {name: '', surname: '', email: '', id: '', isOnline: false, avatar: ''},
+    user: {name: '', surname: '', email: '', id: '', isOnline: 'offline', avatar: ''},
     loginUser: {email: '', id: ''},
     isLoading: false,
     error: ''
@@ -62,7 +62,7 @@ export const userSlice = createSlice({
             state.user.surname = ''
             state.user.email = ''
             state.user.id = ''
-            state.user.isOnline = false
+            state.user.isOnline = 'Offline'
         },
         removeLoginUser(state) {
             state.loginUser.email = ''

@@ -12,7 +12,7 @@ interface Iusers {
     avatarPath?: string,
     createdAt: Icreated,
     email: string,
-    isOnline: boolean,
+    isOnline: string,
     name: string,
     surname: string,
     uid: string

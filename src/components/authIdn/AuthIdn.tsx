@@ -16,12 +16,17 @@ import { useAppSelector } from '../../hooks/redux'
 import Spinner from '../spinner/Spinner'
 import spinCss from '../spinner/spinner.module.css'
 
+
 const AuthIdn: FC = () => {
     const {name} = useAppSelector(state => state.userReducer.user)
     const {img, imgProfileLoading} = useAppSelector(state => state.profileReducer)
+    const dispatch = useAppDispatch()
 
-    const onChangeHandler = (e: any) => {
-        console.log(e.target.value)
+    const onChangeHandler = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+        await updateDoc(doc(db, 'users', auth.currentUser!.uid), {
+            isOnline: e.target.value
+        })
+        
     }
 
     return (
@@ -44,9 +49,9 @@ const AuthIdn: FC = () => {
                         <div className={c.statusArrow}>&lsaquo;</div>
                     </div> */}
                     <select className={c.select} onChange={onChangeHandler}>
-                        <option value='Avaliable'>Avaliable</option>
+                        <option value='Online'>Online</option>
                         <option value='Offline'>Offline</option>
-                        <option value='AFK'>AFK</option>
+                        <option value='Sleep'>Sleep</option>
                     </select>
                 </div>
             </div>
