@@ -11,7 +11,7 @@ import { asyncRegistrAction } from "../../store/actionsCreator/asyncRegistration
 
 import classes from './signUpPage.module.css'
 import btn from '../../components/ui/button/myButton.module.css'
-
+import inputClasses from '../../components/ui/input/input.module.css'
 
 const SignUpPage: FC = () => {
 	const {isLoading, error, status} = useAppSelector(state => state.registerStateReducer)
@@ -52,6 +52,7 @@ const SignUpPage: FC = () => {
 						placeholder="Name" 
 						value={state.name}
 						onChange={addTextHandler}
+						className={inputClasses.input}
 					/>
 					<Input
 						name='surname' 
@@ -59,6 +60,7 @@ const SignUpPage: FC = () => {
 						placeholder="Surname"
 						value={state.surname}
 						onChange={addTextHandler}
+						className={inputClasses.input}
 					/>
 					<Input
 						name='email' 
@@ -67,6 +69,7 @@ const SignUpPage: FC = () => {
 
 						value={state.email}
 						onChange={addTextHandler}
+						className={inputClasses.input}
 					/>
 					<Input
 						name='password' 
@@ -75,6 +78,7 @@ const SignUpPage: FC = () => {
 
 						value={state.password}
 						onChange={addTextHandler}
+						className={inputClasses.input}
 					/>
 					{content}
 				</Form>

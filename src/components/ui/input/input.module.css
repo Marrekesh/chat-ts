@@ -19,3 +19,9 @@
     border-radius: 4px;
 
 }
+
+.input.inputSearch {
+    width: 200px;
+    height: 30px;
+    margin-bottom: 0;
+}

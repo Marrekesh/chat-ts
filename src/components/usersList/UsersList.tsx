@@ -11,6 +11,7 @@ import { TMessage } from '../../store/reducers/MessagesSlice'
 import { gumno } from '../../store/actionsCreator/gumno'
 import { GumnoMessage } from '../../store/actionsCreator/GumnoMessage'
 import UserListItem from '../userListItem/UserListItem'
+import { useFilterUsers } from '../../hooks/useFilter'
 
 import c from './usersList.module.css'
 
@@ -20,7 +21,9 @@ const UsersList: FC = () => {
 	const messages = useAppSelector(state => state.messageReducer.messages)
 	const chatUser = useAppSelector(state => state.chatUserSliceReducer.chatUser)
 	const user1 = auth.currentUser?.uid
-	//
+	const term = useAppSelector(state => state.usersSliceReduser.filter.term)
+
+	const filteredUsers = useFilterUsers(users, term)
 
 	// const user2 = chatUser.uid
 	// const id = user1! > user2 ? `${user1 + user2}` : `${user2 + user1}`;
@@ -159,7 +162,7 @@ const UsersList: FC = () => {
 
 	return (
 		<div className={c.userList}>
-			{users.map(item => {
+			{filteredUsers.map(item => {
 				return <UserListItem key={item.uid} user={item} user1={user1} selectUser={selectUser}/>
 			})}
 			

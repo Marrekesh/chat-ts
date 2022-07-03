@@ -32,6 +32,10 @@
     background-color: rgba(255, 255, 255, 0.14)
 }
 
+.btn.btnLogin {
+    width: 100px;
+    height: 35px; 
+}
 
 /* .btn:hover {
     background-color: #bedaee;
@@ -42,12 +46,12 @@
     height: 35px;
     font-size: 15px;
     padding: 0 10px;
-}
+} */
 
 .formButton {
     border: none;
     display: block;
-    background-color: #3ca9e2;
+    background-color: #509ee2;
     color: #fff;
     font-weight: 700;
     text-transform: uppercase;
@@ -68,11 +72,11 @@
     border-radius: 4px;
 }
 
-.formButton:hover {
+ .formButton:hover {
     background-color: #3492c5;
-}
+} 
 
-.signUp {
+/* .signUp {
     background-color: #fff;
     border: 2px solid #3ca9e2;
     color: #3ca9e2;

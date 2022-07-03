@@ -13,6 +13,7 @@ import { removeUser, removeLoginUser } from '../../store/reducers/UserSlice'
 import { signOut } from "firebase/auth"
 import { auth, db } from '../../firebase/firebase'
 import { updateDoc, doc } from 'firebase/firestore'
+import FiltrationUsers from '../filtrationUsers/FiltrationUsers'
 // import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
 // import { MenuProps, Row } from 'antd';
 // import { Breadcrumb, Layout, Menu } from 'antd';
@@ -91,7 +92,9 @@ const NavBar: FC = () => {
                 <div className={` ${c.navbar} ${c.navBtw}`}>
                 <div className={c.logoSearchBLock}>
                     <div className={c.logo}>Chat</div>
-                    <div className={c.search}>Search</div>
+                    {/* <div className={c.search}>Search</div>
+                     */}
+                     <FiltrationUsers/>
                 </div>
                 <nav className={navClasses}>
                     <div className={c.btnGroup}>

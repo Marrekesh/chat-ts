@@ -20,6 +20,7 @@ import spinClas from '../../components/spinner/spinner.module.css'
 
 import classes from './loginPage.module.css'
 import btn from '../../components/ui/button/myButton.module.css'
+import inputClasses from '../../components/ui/input/input.module.css'
 
 const LoginPage: FC = () => {
 	const state = useAppSelector(state => state.authStateReducer.loginState)
@@ -97,6 +98,7 @@ const LoginPage: FC = () => {
 						placeholder="Email"
 						value={state.email}
 						onChange={addTextHandler}
+						className={inputClasses.input}
 					/>
 					<Input
 						name="password"  
@@ -104,6 +106,7 @@ const LoginPage: FC = () => {
 						placeholder="Password"
 						value={state.password}
 						onChange={addTextHandler}
+						className={inputClasses.input}
 					/>
 					{/* <MyButton 
 						className={btn.formButton}

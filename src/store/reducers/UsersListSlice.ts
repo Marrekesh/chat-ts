@@ -18,16 +18,22 @@ interface Iusers {
     uid: string
 }
 
+interface IUsersFilter {
+    term: string
+}
+
 export type Iarray = Array<Iusers>
 
 interface IusersState {
     users: Iarray,
+    filter: IUsersFilter,
     isLoading: boolean,
     error: string
 }
 
 const initialState: IusersState = {
     users: [],
+    filter: {term: ''},
     isLoading: false,
     error: ''
 }
@@ -54,9 +60,12 @@ export const userSlice = createSlice({
                 //     uid: action.payload.uid
                 // })
             
+        },
+        filterUser(state, action:PayloadAction<string>) {
+            state.filter.term = action.payload
         }   
     }
 })
-export const {setUsers} = userSlice.actions;
+export const {setUsers, filterUser} = userSlice.actions;
 
 export default userSlice.reducer
