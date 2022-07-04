@@ -10,6 +10,7 @@ import { setText } from '../../store/reducers/MessagesSlice'
 import { useAppDispatch } from '../../hooks/redux'
 import { setImgUrl } from '../../store/reducers/MessagesSlice'
 import { asyncCreateMessage } from '../../store/actionsCreator/asyncCreateMessage'
+import { removeImgName } from '../../store/reducers/MessagesSlice'
 
 const MessageWindow = () => {
 
@@ -32,6 +33,7 @@ const MessageWindow = () => {
         await dispatch(asyncCreateMessage(text, user1, user2, url, id))
         dispatch(setImgUrl(''))
         dispatch(setText(''))
+        dispatch(removeImgName())
         // let url;
         // if (img) {
         //     const imgRef = ref(storage, `images/${new Date().getTime()} - ${img.name}`)

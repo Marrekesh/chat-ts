@@ -4,10 +4,10 @@ import { collectionGroup, query, where, onSnapshot,  collection, addDoc, Timesta
 import { getDownloadURL, ref, uploadBytes, deleteObject } from 'firebase/storage'
 import { db, auth, storage } from '../../firebase/firebase'
 import { useState } from 'react'
-import { setText } from '../../store/reducers/MessagesSlice'
+import { setText } from '../reducers/MessagesSlice'
 import { useAppDispatch } from '../../hooks/redux'
-import { setImgUrl, setImgLoading } from "../../store/reducers/MessagesSlice"
-
+import { setImgUrl, setImgLoading } from "../reducers/MessagesSlice"
+import { setImgName } from "../reducers/MessagesSlice"
 
 //Спросить как типизировать файли
 export const asyncGetImgInMessageAction = (img: any) => async (dispatch: AppDispatch) => {
@@ -16,6 +16,7 @@ export const asyncGetImgInMessageAction = (img: any) => async (dispatch: AppDisp
         // let url;
         dispatch(setImgLoading(true))
         if (img) {
+            dispatch(setImgName(img.name))
             const imgRef = ref(storage, `images/${new Date().getTime()} - ${img.name}`)
             const snap = await uploadBytes(imgRef, img)
             const dlUrl = await getDownloadURL(ref(storage, snap.ref.fullPath))

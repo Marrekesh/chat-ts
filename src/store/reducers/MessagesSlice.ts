@@ -24,6 +24,7 @@ interface IStateMessage {
     messages: TMessage,
     lastMessage: IMessage,
     img: string,
+    imgName: string,
     isLoadingImg: boolean,
     isLoading: boolean,
     error: string
@@ -44,6 +45,7 @@ const initialState: IStateMessage = {
         unread: false
     },
     img: '',
+    imgName: '',
     isLoading: false,
     isLoadingImg: false,
     error: ''
@@ -73,6 +75,12 @@ const messageSlice = createSlice({
         setImgUrl(state, action: PayloadAction<string>) {
             state.img = action.payload
         },
+        setImgName(state, action: PayloadAction<string>) {
+            state.imgName = action.payload
+        },
+        removeImgName(state) {
+            state.imgName = ''
+        },
         setError(state, action: PayloadAction<string>) {
             state.error = action.payload
         },
@@ -85,6 +93,15 @@ const messageSlice = createSlice({
     }
 })
 
-export const {setText, setMessages, setError, setLoading, setImgUrl, setImgLoading, setLastMessage} = messageSlice.actions;
+export const {
+    setText,
+    setMessages, 
+    setError, 
+    setLoading, 
+    setImgUrl, 
+    setImgLoading, 
+    setLastMessage,
+    setImgName,
+    removeImgName} = messageSlice.actions;
 
 export default messageSlice.reducer
