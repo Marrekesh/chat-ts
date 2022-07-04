@@ -4,26 +4,18 @@ import { Link } from 'react-router-dom'
 import MyButton from '../ui/button/MyButton'
 import buttonClasses from '../ui/button/myButton.module.css'
 import { useLocation } from 'react-router-dom'
-import Burger from '../burger/Burger'
 import AuthIdn from '../authIdn/AuthIdn'
 import { FC } from 'react'
-import NavigationMenu from '../navigationMenu/NavigationMenu'
 import { useAppDispatch } from '../../hooks/redux'
 import { removeUser, removeLoginUser } from '../../store/reducers/UserSlice'
 import { signOut } from "firebase/auth"
 import { auth, db } from '../../firebase/firebase'
 import { updateDoc, doc } from 'firebase/firestore'
 import FiltrationUsers from '../filtrationUsers/FiltrationUsers'
-// import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
-// import { MenuProps, Row } from 'antd';
-// import { Breadcrumb, Layout, Menu } from 'antd';
-// import React from 'react';
 
-// const { Header, Content, Sider } = Layout;
 
 const NavBar: FC = () => {
     const {isAuth} = useAuth()
-    const navClasses = isAuth ? `${c.nav}` :`${c.nav} ${c.navEnd}`
     const {pathname} = useLocation()
 
     interface IbuttonsMenu {
@@ -47,18 +39,13 @@ const NavBar: FC = () => {
         await signOut(auth)
         dispatch(removeUser())
         dispatch(removeLoginUser())
-        // navigate('/login')
-        // dispatch(setStatus(false))
-        // localStorage.removeItem('userData')
-
-        // dispatch(setMainUserLoading(false))
     }
 
 
     if (!isAuth && pathname === '/registration') {
         return (
             <div className={c.navbar}>
-                <nav className={navClasses}>
+                <nav className={c.nav}>
                     <Link to="/login">
                         <MyButton className={buttonClasses.btn}>Login</MyButton>
                     </Link>
@@ -68,7 +55,7 @@ const NavBar: FC = () => {
     } else if (isAuth && pathname === '/profile') {
         return (
             <div className={c.navbar}>
-                <nav className={navClasses}>
+                <nav className={c.nav}>
                     <div className={c.btnGroup}>
                         {buttonsList.map(item => {
                             return (
@@ -83,8 +70,6 @@ const NavBar: FC = () => {
                     </div>
                    <AuthIdn/>
                 </nav> 
-                
-                {/* <NavigationMenu/> */}
             </div>
         )
     } else if(isAuth) {
@@ -92,11 +77,9 @@ const NavBar: FC = () => {
                 <div className={` ${c.navbar} ${c.navBtw}`}>
                 <div className={c.logoSearchBLock}>
                     <div className={c.logo}>Chat</div>
-                    {/* <div className={c.search}>Search</div>
-                     */}
                      <FiltrationUsers/>
                 </div>
-                <nav className={navClasses}>
+                <nav className={c.nav}>
                     <div className={c.btnGroup}>
                         {buttonsList.map(item => {
                             return (
@@ -111,14 +94,12 @@ const NavBar: FC = () => {
                     </div>
                 <AuthIdn/>
                 </nav> 
-                
-                {/* <NavigationMenu/> */}
             </div>
         )
     } else {
         return (
             <div className={c.navbar}>
-                <nav className={navClasses}>
+                <nav className={c.nav}>
                     <Link to="/registration">
                         <MyButton className={buttonClasses.btn}>Sign Up</MyButton>
                     </Link>
@@ -126,30 +107,6 @@ const NavBar: FC = () => {
             </div>
         )
     }
-     
-
-    //     <Link to="/registration">
-    //     <MyButton className={buttonClasses.btn}>Sign Up</MyButton>
-    // </Link>
-
-    //     <Link to="/registration">
-    //     <MyButton className={buttonClasses.btn}>Sign Up</MyButton>
-    // </Link>
-
-
-    // <NavBar>
-    // <Burger/>
-    // <AuthIdn/>
-    // </NavBar> 
-    // return (
-    //     <div className={c.navbar}>
-    //         <nav className={navClasses}>
-    //             <Link to="/login">
-    //                 <MyButton className={buttonClasses.btn}>Login</MyButton>
-    //             </Link>
-    //         </nav> 
-    //     </div>
-    // )
 }
 
 export default NavBar

@@ -27,40 +27,9 @@ const LoginPage: FC = () => {
 	const {error} = useAppSelector(state => state.authStateReducer)
 	const dispatch = useAppDispatch()
 	const {isLoading} = useAppSelector(state => state.authStateReducer)
-	const status = useAppSelector(state => state.authStateReducer.status)
 
 	const navigate = useNavigate()
 	
-
-	// useEffect(() => {
-	// 	const data = JSON.parse(localStorage.getItem('userData') || "{}")
-	// 	// if (data && data.email) {
-	// 		// dispatch(setUser({
-	// 		// 	id: data.id,
-	// 		// 	email: data.email
-	// 		// }))
-	// 	// }
-	// 	onAuthStateChanged(auth, (user) => {
-	// 		// console.log(user?.uid)
-	// 		// console.log(user?.email)
-	// 		// if(data.id === user!.uid) {
-	// 		// 	dispatch(setUser({
-	// 		// 		id: data.id,
-	// 		// 		email: data.email
-	// 		// 	}))
-	// 		// }
-	// 		console.log(user)
-	// 		dispatch(setUser({
-	// 			id: user!.uid,
-	// 			email: user!.email
-	// 		}))
-	// 		// dispatch(setStatus(true))
-	// 	})
-	// }, [])
-
-	// if (status) {
-	// 	return <Loader/>
-	// }
 
 	const addTextHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
 		dispatch(setLoginState({...state, [e.target.name]: e.target.value}))
@@ -108,13 +77,7 @@ const LoginPage: FC = () => {
 						onChange={addTextHandler}
 						className={inputClasses.input}
 					/>
-					{/* <MyButton 
-						className={btn.formButton}
-						onClick={loginHendler}
-						>Login
-					</MyButton> */}
 					{spinnerOrButton}
-					{/* <Link to="/registration"><MyButton className={`${buttonClasses.formButton} ${buttonClasses.signUp}`}>Sign Up</MyButton></Link> */}
 				</Form>
 				{error ? <AlertBlock>{error}</AlertBlock> : null}
 			</div>

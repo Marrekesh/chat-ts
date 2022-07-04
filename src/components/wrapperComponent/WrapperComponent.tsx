@@ -8,7 +8,6 @@ const WrapperComponent = ({children}: any) => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        // dispatch(setMainUserLoading(true))
             dispatch(asyncGetMainUserAction())
     }, [])
 

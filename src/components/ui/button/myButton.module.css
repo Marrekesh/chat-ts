@@ -1,6 +1,4 @@
 .btn {
-    /* width: 100px;
-    height: 35px; */
     padding: 20px 30px;
     background-color: #509ee2;
     border-radius: 3px;
@@ -19,9 +17,6 @@
 
 .btn:hover {
     background-color: #4f80ac;
-    /* opacity: 0.14; */
-    /* background-color: rgba(255, 255, 255, 0.14); */
-    /* background-color: #ffffff; */
 }
 
 .navBtn {
@@ -37,16 +32,6 @@
     height: 35px; 
 }
 
-/* .btn:hover {
-    background-color: #bedaee;
-}
-
-.btn.btnMini {
-    width: auto;
-    height: 35px;
-    font-size: 15px;
-    padding: 0 10px;
-} */
 
 .formButton {
     border: none;
@@ -75,13 +60,3 @@
  .formButton:hover {
     background-color: #3492c5;
 } 
-
-/* .signUp {
-    background-color: #fff;
-    border: 2px solid #3ca9e2;
-    color: #3ca9e2;
-}
-.signUp:hover {
-    background-color: #3ca9e2;
-    color: #fff;
-} */

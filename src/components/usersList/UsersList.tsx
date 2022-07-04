@@ -1,15 +1,13 @@
-import { FC, useEffect, useState, useCallback } from 'react'
+import { FC, useEffect } from 'react'
 import { db, auth } from '../../firebase/firebase'
-import { collectionGroup, query, where, onSnapshot, collection, addDoc ,getDoc, updateDoc,doc, orderBy } from 'firebase/firestore'
+import { query, where, onSnapshot, collection, getDoc, updateDoc,doc, orderBy } from 'firebase/firestore'
 import { useAppSelector, useAppDispatch } from '../../hooks/redux'
 import { setUsers } from '../../store/reducers/UsersListSlice'
 import { Iarray } from '../../store/reducers/UsersListSlice'
 import { IChatUser } from '../../store/reducers/ChatUserSlice'
-import { setChatUser, removeChatUser } from '../../store/reducers/ChatUserSlice'
+import { setChatUser } from '../../store/reducers/ChatUserSlice'
 import { setMessages } from '../../store/reducers/MessagesSlice'
 import { TMessage } from '../../store/reducers/MessagesSlice'
-import { gumno } from '../../store/actionsCreator/gumno'
-import { GumnoMessage } from '../../store/actionsCreator/GumnoMessage'
 import UserListItem from '../userListItem/UserListItem'
 import { useFilterUsers } from '../../hooks/useFilter'
 
@@ -25,18 +23,10 @@ const UsersList: FC = () => {
 
 	const filteredUsers = useFilterUsers(users, term)
 
-	// const user2 = chatUser.uid
-	// const id = user1! > user2 ? `${user1 + user2}` : `${user2 + user1}`;
 
-
-	// const msgsRef =  collection(db, "messages", id, "chat");
-	// const q = query(msgsRef, orderBy("createdAd", "asc"));
-	//
 	useEffect(() => {
 		const usersRef = collection(db, 'users')
-		//create query object
 		const q = query(usersRef, where('uid', 'not-in', [auth.currentUser?.uid]))
-		//execute query
 
 		const unsub = onSnapshot (q, querySnapshot => {
 			let users: Iarray = []
@@ -68,18 +58,14 @@ const UsersList: FC = () => {
 		const user2 = chatUser.uid
 		const id = user1! > user2 ? `${user1 + user2}` : `${user2 + user1}`;
 	
-	
 		const msgsRef =  collection(db, "messages", id, "chat");
 		const q = query(msgsRef, orderBy("createdAd", "asc"));
-
-		// dispatch(GumnoMessage(q, id, user1))
 
 		const unsub = onSnapshot(q, (querySnapshot) => {
 		
 			let msgs: TMessage = [];
 			querySnapshot.forEach((doc) => {
 				const item = doc.data()
-				// console.log(item)
 				msgs.push({
 					createdAd: {
 						seconds: item.createdAd.seconds,
@@ -114,50 +100,13 @@ const UsersList: FC = () => {
 			uid: user.uid
 		}))
 
-		// await dispatch(gumno(user))
-		// console.log(chatUser)
-
-
 		const user2 = chatUser.uid
 		const id = user1! > user2 ? `${user1 + user2}` : `${user2 + user1}`;
-
-
-		// const msgsRef =  collection(db, "messages", id, "chat");
-		// const q = query(msgsRef, orderBy("createdAd", "asc"));
-		
-
-
-
-		// // await(dispatch(GumnoMessage(q)))
-		// 	onSnapshot(q, (querySnapshot) => {
-				
-		// 		let msgs: TMessage = [];
-		// 		querySnapshot.forEach((doc) => {
-		// 			const item = doc.data()
-		// 			// console.log(item)
-		// 			msgs.push({
-		// 				createdAd: {
-		// 					seconds: item.createdAd.seconds,
-		// 					nanoseconds: item.createdAd.nanoseconds
-		// 				}, 
-		// 				from: item.from,
-		// 				media: item.media,
-		// 				text: item.text,
-		// 				to: item.to
-		// 			});
-		// 		});
-			
-		// 		dispatch(setMessages(msgs))
-		// 	});
-	
 
 		const docSnap: any = await getDoc(doc(db, "lastMsg", id));
 		if (docSnap.data() && docSnap.data().from !== user1) {
 		  await updateDoc(doc(db, "lastMsg", id), { unread: false });
 		}
-
-
-	// dispatch(removeChatUser())
 	}
 
 	return (
@@ -165,7 +114,6 @@ const UsersList: FC = () => {
 			{filteredUsers.map(item => {
 				return <UserListItem key={item.uid} user={item} user1={user1} selectUser={selectUser}/>
 			})}
-			
 		</div>
 	)
 }

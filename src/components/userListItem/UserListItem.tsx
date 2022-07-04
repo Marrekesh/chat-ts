@@ -4,10 +4,6 @@ import { IChatUser } from '../../store/reducers/ChatUserSlice'
 import { onSnapshot, doc } from "firebase/firestore";
 import { db } from '../../firebase/firebase'
 import { useAppSelector } from '../../hooks/redux'
-// import { asyncAddLastMessage } from '../../store/actionsCreator/asyncAddLastMessage'
-import { useAppDispatch } from '../../hooks/redux'
-import { setLastMessage, LastMessage } from '../../store/reducers/MessagesSlice'
-
 
 interface UsersItemProps {
     user: IChatUser,
@@ -16,34 +12,10 @@ interface UsersItemProps {
 }
 
 const UserListItem: FC<UsersItemProps> = ({user, selectUser, user1}) => {
-    const dispatch = useAppDispatch()
     const user2 = user?.uid
 
     const chatUser = useAppSelector(state => state.chatUserSliceReducer.chatUser)
     
-    // console.log(chatUser)
-    // const data = useAppSelector(state => state.messageReducer.lastMessage)
-    // console.log(typeof data)
-    // useEffect(() => {
-        
-    //     const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`;
-    //     let unsub = onSnapshot(doc(db, "lastMsg", id), (doc) => {
-    //         let item = doc.data()
-    //         dispatch(setLastMessage({
-    //             createdAd: {
-    //                 seconds: item!.createdAt.seconds,
-    //                 nanoseconds: item!.createdAt.nanoseconds
-    //             },
-    //             from: item!.from,
-    //             to: item!.to,
-    //             text: item!.text,
-    //             media: item!.media,
-    //             unread: item!.unread
-    //         }))
-    //     });
-    //     return () => unsub();
-    //   }, []);
-
 
     const [data, setData] = useState<any>('')
     useEffect(() => {
@@ -54,8 +26,6 @@ const UserListItem: FC<UsersItemProps> = ({user, selectUser, user1}) => {
       });
       return () => unsub();
     }, []);
-
-    // const status = !user.isOnline ? <div className={c.status}>&bull;</div> : <div className={`${c.status} ${c.statusActive}`}>&bull;</div>
 
     const status =  <div className={`${c.status} ${c[user.isOnline]}`}>&bull;</div> 
 
@@ -74,7 +44,6 @@ const UserListItem: FC<UsersItemProps> = ({user, selectUser, user1}) => {
                         <strong className={c.strong}>{data.from === user1 ? 'Me: ': user.name + ':' }</strong>{data.text}
                     </div>
                     }
-                    {/* <div className={c.message}>asd</div> */}
                 </div>
 
             </div>

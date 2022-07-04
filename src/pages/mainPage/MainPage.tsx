@@ -7,7 +7,6 @@ import MessageWindow from '../../components/messageWindow/MessageWindow'
 const MainPage = () => {
 	return (
 		<>
-
 			<div className={c.mainPage}>
 				<UsersBar/>
 				<MessageWindow/>

@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { UserState } from '../../types/stateTypes'
 import { AuthUserDataString, AuthUserDataBoolean } from '../../types/actionsTypes'
 
 interface ILoginUser {
@@ -30,13 +29,6 @@ const initialState: IUSerState = {
     error: ''
 }
 
-
-// const initialState: any = {
-//     id: '',
-//     email: '',
-//     isLoading: false,
-//     error: ''
-// }
 
 export const userSlice = createSlice({
     name: 'user',

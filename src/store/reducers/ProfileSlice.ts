@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { IUser } from './UserSlice'
 
 export interface IProfileUser {
     avatar: string

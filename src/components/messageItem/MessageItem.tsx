@@ -2,10 +2,6 @@ import React, { FC, useRef, useEffect } from 'react'
 import c from './messageItem.module.css'
 import { IMessage } from '../../store/reducers/MessagesSlice'
 
-
-import Moment from 'react-moment'
-import { useAppSelector } from '../../hooks/redux'
-
 const Img = require('../../images/img-not-found.jpg')
 
 interface MessageItemProps {
@@ -16,7 +12,6 @@ interface MessageItemProps {
 
 const MessageItem: FC<MessageItemProps> = ({message, user1, user2}) => {
     
-    // const chatUser = useAppSelector(state => state.chatUserSliceReducer.chatUser.avatar)
     
     const scrollRef: any = useRef()
 
@@ -31,28 +26,23 @@ const MessageItem: FC<MessageItemProps> = ({message, user1, user2}) => {
     const userClassesConten = message.from === user1 ?
     
     
-                                                    <div ref={scrollRef} className={` ${c.wrapperS} ${ c.wrapperSRight}`}>
-                                                        <div className={`${c.messageItem} ${c.messageItemRight}`}>
-                                                            <div className={`${c.textMessage} ${c.textMessageRight}`}>
-                                                            {/* <div className={c.triangleRight}></div> */}
+                                                <div ref={scrollRef} className={` ${c.wrapperS} ${ c.wrapperSRight}`}>
+                                                    <div className={`${c.messageItem} ${c.messageItemRight}`}>
+                                                        <div className={`${c.textMessage} ${c.textMessageRight}`}>
+                                                        {img}
+                                                        {text}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            :
+                                                <div ref={scrollRef} className={c.wrapperS}>
+                                                    <div className={c.messageItem}>                                        
+                                                        <div className={c.textMessage}>          
                                                             {img}
                                                             {text}
-                                                            </div>
-                                                            {/* {img} */}
                                                         </div>
                                                     </div>
-                                                :
-                                                    <div ref={scrollRef} className={c.wrapperS}>
-                                                        <div className={c.messageItem}>
-                                                            {/* {img} */}
-                                                            {/* <img className={c.avatar} src={chatUser} alt="avka" /> */}
-                                                            <div className={c.textMessage}>
-                                                                {/* <div className={c.triangle}></div> */}
-                                                                {img}
-                                                                {text}
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                </div>
 
     return (
         <>

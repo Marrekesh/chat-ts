@@ -2,8 +2,9 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import Input from '../ui/input/Input'
 import inpCls from '../ui/input/input.module.css'
 import { filterUser } from '../../store/reducers/UsersListSlice'
+import { FC } from 'react'
 
-const FiltrationUsers = () => {
+const FiltrationUsers: FC = () => {
 
     const dispatch = useAppDispatch()
 

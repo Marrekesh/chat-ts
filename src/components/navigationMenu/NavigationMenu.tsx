@@ -18,9 +18,7 @@ const NavigationMenu: FC = () => {
         {component: Profile, link: '/profile'},
         {component: Message, link: '/main'},
         {component: Logout, link: '/login'},
-
     ]   
-
 
   return (
         <nav className={c.navigationMenu}>

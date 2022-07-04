@@ -1,45 +1,6 @@
-/* .burger {
-    position: absolute;
-    width: 25px;
-    height: 20px;
-}
-
-.burgerChild {
-    width: 25px;
-    margin-bottom: 5px;
-    height: 3px;
-    background-color: #ffffff;
-    border-radius: 1.5px;
-    transition: 200ms ease-in-out;
-}
-
-.burgerChild:nth-child(2) {
-    width: 18px;
-}
-
-
-.burgerChild.active:nth-child(2) {
-    display: none;
-}
-
-.burgerChild.active:nth-child(1) {
-    
-    transform: rotate(45deg) ;
-    
-    margin: 0;
-}
-
-.burgerChild.active:nth-child(3) {
-    transform: rotate(-45deg);
-    margin: 0;
-}  */
 
 .burger {
     display: block;
-    /* position: absolute; */
-    /* right: 10px;
-    top: 50%; */
-    /* transform: translateY(-50%); */
     width: 26px;
     height: 12px;  
 }

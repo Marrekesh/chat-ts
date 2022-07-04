@@ -1,18 +1,14 @@
 import { AppDispatch } from "../store"
-import { useAppSelector } from '../../hooks/redux'
-import { collectionGroup, query, where, onSnapshot,  collection, addDoc, Timestamp, setDoc, doc } from 'firebase/firestore'
-import { getDownloadURL, ref, uploadBytes, deleteObject } from 'firebase/storage'
-import { db, auth, storage } from '../../firebase/firebase'
-import { useState } from 'react'
-import { setText, setError } from '../../store/reducers/MessagesSlice'
-import { useAppDispatch } from '../../hooks/redux'
-import { setImgUrl } from "../../store/reducers/MessagesSlice"
+import { collection, addDoc, Timestamp, setDoc, doc } from 'firebase/firestore'
+
+import { db } from '../../firebase/firebase'
+
+import {  setError } from '../../store/reducers/MessagesSlice'
+
 
 export const asyncCreateMessage = (text: string, user1: string | undefined, user2: string, url: string, id: string) => async (dispatch: AppDispatch) => {
 
-    try {
-        
-        
+    try {  
         await addDoc(collection(db, 'messages', id, 'chat'), {
             text,
             from: user1,
@@ -29,9 +25,6 @@ export const asyncCreateMessage = (text: string, user1: string | undefined, user
             media: url || "",
             unread: true,
         });
-        // dispatch(setText(''))
-		
-		
     } catch (error: any) {
        dispatch(setError(error.message))
     } finally {

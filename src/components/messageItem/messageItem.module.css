@@ -10,7 +10,6 @@
 
 .messageItem {
     display: flex;
-    /* align-items: center; */
     margin-bottom: 20px;
 
 }
@@ -33,8 +32,6 @@
 
 .textMessage {
     position: relative;
-    /* display: flex;
-    align-items: center; */
     word-wrap: break-word;
     padding: 25px;
 

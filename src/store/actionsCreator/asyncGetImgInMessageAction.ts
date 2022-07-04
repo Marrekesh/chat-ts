@@ -1,11 +1,6 @@
 import { AppDispatch } from "../store"
-import { useAppSelector } from '../../hooks/redux'
-import { collectionGroup, query, where, onSnapshot,  collection, addDoc, Timestamp, setDoc, doc } from 'firebase/firestore'
-import { getDownloadURL, ref, uploadBytes, deleteObject } from 'firebase/storage'
-import { db, auth, storage } from '../../firebase/firebase'
-import { useState } from 'react'
-import { setText } from '../reducers/MessagesSlice'
-import { useAppDispatch } from '../../hooks/redux'
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
+import { storage } from '../../firebase/firebase'
 import { setImgUrl, setImgLoading } from "../reducers/MessagesSlice"
 import { setImgName } from "../reducers/MessagesSlice"
 
@@ -20,7 +15,6 @@ export const asyncGetImgInMessageAction = (img: any) => async (dispatch: AppDisp
             const imgRef = ref(storage, `images/${new Date().getTime()} - ${img.name}`)
             const snap = await uploadBytes(imgRef, img)
             const dlUrl = await getDownloadURL(ref(storage, snap.ref.fullPath))
-            // url = dlUrl
             dispatch(setImgUrl(dlUrl))
         }
          

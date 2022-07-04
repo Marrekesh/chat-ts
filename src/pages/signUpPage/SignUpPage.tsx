@@ -2,7 +2,6 @@ import React, { FC } from "react"
 import Form from "../../components/ui/form/Form"
 import Input from "../../components/ui/input/Input"
 import MyButton from "../../components/ui/button/MyButton"
-import NavBar from '../../components/navbar/NavBar';
 import AlertBlock from "../../components/alert/AlertBlock"
 
 import { useAppSelector, useAppDispatch } from "../../hooks/redux"
@@ -42,7 +41,6 @@ const SignUpPage: FC = () => {
 		<h3>Loading</h3>
 
 	return (
-
 		<>
 			<div className={classes.signUpPage}>
 				<Form title="Sign Up">
@@ -84,10 +82,7 @@ const SignUpPage: FC = () => {
 				</Form>
 				{error ? <AlertBlock>{error}</AlertBlock> : null}
 			</div>
-		
 		</>
-
-	
 	)
 }
 
